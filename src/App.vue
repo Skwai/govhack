@@ -56,7 +56,19 @@ export default {
 
 <style lang="stylus">
 html {
-  font-size: 16px;
+  font-size: 13px;
+
+  @media (min-width: 480px) {
+    font-size: 14px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 15px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 16px;
+  }
 }
 
 body {
