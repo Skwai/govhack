@@ -1,36 +1,71 @@
 <template>
-  <div id="app">
-    <hello></hello>
+  <div class="App">
+    <FormFields></FormFields>
+    <Loading v-if="loading"></Loading>
+    <DataVisuals v-else></DataVisuals>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
+import FormFields from './components/FormFields';
 import SheetsService from './services/Sheets';
 
 export default {
-  name: 'app',
+  data() {
+    return {
+      loading: true,
+    };
+  },
   components: {
-    Hello,
+    FormFields,
   },
   async created() {
-    const sheets = new SheetsService({
-      cols: ['Foo', 'Bar', 'Baz'],
-      sheetId: '1xnKLKn-eVDguXzArz9uHbT3ACeLfYSBzmmB0DAy0dvM',
-    });
-    const rows = await sheets.loadData();
-    console.log(rows);
+    try {
+      const sheets = new SheetsService({
+        cols: ['Foo', 'Bar', 'Baz'],
+        sheetId: '1xnKLKn-eVDguXzArz9uHbT3ACeLfYSBzmmB0DAy0dvM',
+      });
+      const rows = await sheets.loadData();
+      console.log(rows);
+    } finally {
+      this.loading = false;
+    }
   },
 };
 </script>
 
 <style>
-#app {
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+body,
+input,
+button,
+textarea {
+  color: #333;
+  font-size: 0.9125rem;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background: #f1f2f3;
+  display: flex;
+  min-height: 100vh;
 }
 </style>
