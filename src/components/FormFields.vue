@@ -1,13 +1,7 @@
 <template>
 
   <form class="FormFields" @submit.prevent="submit">
-    <header class="FormFields__Header">
-      <!--
-      <svg class="FormFields__Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="#333" stroke-width="0.5" stroke-miterlimit="10"><path d="M12 17.3c-.7.4-1.8.7-3 .7-2.2 0-4-.9-4-2 0-.6.5-1.1 1.4-1.5" data-cap="butt"/><path d="M12 14.3c-.7.4-1.8.7-3 .7-2.2 0-4-.9-4-2 0-.6.5-1.1 1.3-1.5" data-cap="butt"/><path d="M12 11.3c-.7.4-1.8.7-3 .7-2.2 0-4-.9-4-2 0-.6.5-1.1 1.4-1.5m5.2-3c.9.4 1.4.9 1.4 1.5 0 1.1-1.8 2-4 2s-4-.9-4-2c0-.6.5-1.1 1.4-1.5" data-cap="butt"/><ellipse cx="9" cy="4" stroke-linecap="square" rx="4" ry="2"/><path d="M17.6 17.5c.8.4 1.4.9 1.4 1.5 0 1.1-1.8 2-4 2s-4-.9-4-2c0-.6.5-1.1 1.4-1.5" data-cap="butt"FormFields__/><path d="M17.7 14.5c.8.4 1.3.9 1.3 1.5 0 1.1-1.8 2-4 2s-4-.9-4-2c0-.6.5-1.1 1.4-1.5" data-cap="butt"FormFields__/><path d="M17.6 11.5c.8.4 1.4.9 1.4 1.5 0 1.1-1.8 2-4 2s-4-.9-4-2c0-.6.5-1.1 1.4-1.5" data-cap="butt"FormFields__/><ellipse cx="15" cy="10"FormFields__ stroke-linecap="square" rx="4" ry="2"/></g></svg>
-      -->
-      <svg class="FormFields__Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#A67C52" d="M43 11c0-1.105-.895-2-2-2H6C4.346 9 3 7.654 3 6c0-.552-.448-1-1-1s-1 .448-1 1v32c0 3.866 3.134 7 7 7h33c1.105 0 2-.895 2-2V11z"/><path fill="#87613E" d="M46 22H36c-2.757 0-5 2.243-5 5s2.243 5 5 5h10c.552 0 1-.448 1-1v-8c0-.552-.448-1-1-1zM4 3h28c1.105 0 2 .895 2 2v4H4C2.343 9 1 7.657 1 6s1.343-3 3-3z"/><circle cx="36" cy="27" r="2" fill="#EFD358"/></svg>
-      <h1 class="FormFields__Heading">PoorScore</h1>
-    </header>
+    <AppHeader></AppHeader>
     <p class="FormFields__Lead">Find out how your income compares to others.</p>
     <label class="FormFields__Field">
       <span class="FormFields__FieldLabel">Your Yearly Income</span>
@@ -62,8 +56,13 @@
 </template>
 
 <script>
+import AppHeader from './AppHeader';
+
 export default {
   props: ['submitted'],
+  components: {
+    AppHeader,
+  },
   data() {
     return {
       income: null,
@@ -94,22 +93,6 @@ export default {
   &__Lead {
     opacity: .7;
     margin: 0 0 2rem;
-  }
-
-  &__Header {
-    margin-bottom: 1rem;
-  }
-
-  &__Heading {
-    margin: 0;
-    letter-spacing: -0.035em
-    font-size: 1.75rem;
-  }
-
-  &__Logo {
-    width: 3.5rem;
-    height: 3.5rem;
-    margin-bottom: 0.5rem;
   }
 
   &__Field {
