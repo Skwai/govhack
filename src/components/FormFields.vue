@@ -16,6 +16,20 @@
     </div>
     <div class="Form__Field">
       <label>
+        <span class="Form__FieldLabel">Your Age</span>
+        <input
+          type="number"
+          class="Form__FieldInput"
+          required
+          min="1"
+          max="130"
+          maxlength="3"
+          v-model="age"
+        >
+      </label>
+    </div>
+    <div class="Form__Field">
+      <label>
         <span class="Form__FieldLabel">Postcode</span>
         <input
           type="number"
@@ -46,6 +60,7 @@
 
 <script>
 export default {
+  props: ['submitted'],
   data() {
     return {
       income: null,
@@ -110,6 +125,7 @@ export default {
     color: #fff;
     border: 0;
     box-shadow: inset rgba(0,0,0,.15) 0 -3px 0;
+    font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -117,7 +133,8 @@ export default {
     &:hover,
     &:active,
     &:focus {
-      box-shadow: rgba(0,0,0,.125) 0 2px 1rem;
+      outline: 0;
+      box-shadow: inset rgba(0,0,0,.15) 0 -3px 0, rgba(0,0,0,.125) 0 2px 1rem;
     }
   }
 

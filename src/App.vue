@@ -1,10 +1,10 @@
 <template>
   <div class="App">
-    <FormFields></FormFields>
+    <FormFields :submitted="updateProfile"></FormFields>
     <div class="App__Content">
       <Loading v-if="loading"></Loading>
       <Error v-if="error" :error="error"></Error>
-      <!--<DataVisuals v-else></DataVisuals>-->
+      <DataVisuals v-if="!loading && !error"></DataVisuals>
     </div>
   </div>
 </template>
@@ -13,22 +13,30 @@
 import FormFields from './components/FormFields';
 import Loading from './components/Loading';
 import Error from './components/Error';
+import DataVisuals from './components/DataVisuals';
 
 import SheetsService from './services/Sheets';
 
-const ERROR_MESSAGE = 'Could not load data';
+const ERROR_MESSAGE = 'Couldn\'t load data :(';
 
 export default {
   data() {
     return {
       loading: true,
       error: null,
+      rows: [],
     };
+  },
+  methods: {
+    updateProfile({ gender, age, postcode, salary }) {
+      console.log(gender, age, postcode, salary);
+    },
   },
   components: {
     FormFields,
     Loading,
     Error,
+    DataVisuals,
   },
   async created() {
     try {
@@ -36,8 +44,7 @@ export default {
         cols: ['Foo', 'Bar', 'Baz'],
         sheetId: '1xnKLKn-eVDguXzArz9uHbT3ACeLfYSBzmmB0DAy0dvM',
       });
-      const rows = await sheets.loadData();
-      console.log(rows);
+      this.rows = await sheets.loadData();
     } catch (err) {
       this.error = ERROR_MESSAGE;
     } finally {
@@ -60,7 +67,8 @@ body {
   box-sizing: border-box;
 }
 
-button {
+button,
+label {
   cursor: pointer;
 }
 
