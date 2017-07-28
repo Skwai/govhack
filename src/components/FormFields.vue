@@ -1,58 +1,53 @@
 <template>
-  <form class="Form" @submit.prevent="submit">
-    <h2 class="Form__Heading">About You</h2>
-    <p class="Form__Lead">Lorem ipsum dolor sit amet consectuor</p>
-    <div class="Form__Field">
-      <label>
-        <span class="Form__FieldLabel">Your Income</span>
-        <input
-          type="number"
-          class="Form__FieldInput"
-          required
-          maxlength="10"
-          v-model="income"
-        >
+  <form class="FormFields" @submit.prevent="submit">
+    <h2 class="FormFields__Heading">About You</h2>
+    <p class="FormFields__Lead">Lorem ipsum dolor sit amet consectuor</p>
+    <label class="FormFields__Field">
+      <span class="FormFields__FieldLabel">Yearly Income</span>
+      <span class="FormFields__FieldMask">$</span>
+      <input
+        type="number"
+        class="FormFields__FieldInput"
+        required
+        maxlength="10"
+        v-model="income"
+      >
+    </label>
+    <label class="FormFields__Field">
+      <span class="FormFields__FieldLabel">Your Age</span>
+      <input
+        type="number"
+        class="FormFields__FieldInput"
+        required
+        min="1"
+        max="130"
+        maxlength="3"
+        v-model="age"
+      >
+    </label>
+    <label class="FormFields__Field">
+      <span class="FormFields__FieldLabel">Postcode</span>
+      <input
+        type="text"
+        class="FormFields__FieldInput"
+        required
+        minlength="4"
+        maxlength="4"
+        v-model="postcode"
+      >
+    </label>
+    <div class="FormFields__RadioGroup">
+      <label class="FormFields__Radio" :class="{ '-active': gender === 'Male' }">
+        <input class="FormFields__RadioInput" type="radio" value="Male" v-model="gender">
+        <span class="FormFields__RadioLabel">Male</span>
       </label>
-    </div>
-    <div class="Form__Field">
-      <label>
-        <span class="Form__FieldLabel">Your Age</span>
-        <input
-          type="number"
-          class="Form__FieldInput"
-          required
-          min="1"
-          max="130"
-          maxlength="3"
-          v-model="age"
-        >
-      </label>
-    </div>
-    <div class="Form__Field">
-      <label>
-        <span class="Form__FieldLabel">Postcode</span>
-        <input
-          type="number"
-          class="Form__FieldInput"
-          required
-          minlength="4"
-          maxlength="4"
-          v-model="postcode"
-        >
-      </label>
-    </div>
-    <div class="Form__RadioGroup">
-      <label class="Form__Radio" :class="{ '-active': gender === 'Male' }">
-        <input class="Form__RadioInput" type="radio" value="Male" v-model="gender">
-        <span class="Form__RadioLabel">Male</span>
-      </label>
-      <label class="Form__Radio" :class="{ '-active': gender === 'Female' }">
-        <input class="Form__RadioInput" type="radio" value="Female" v-model="gender">
-        <span class="Form__RadioLabel">Female</span>
+      <label class="FormFields__Radio" :class="{ '-active': gender === 'Female' }">
+        <input class="FormFields__RadioInput" type="radio" value="Female" v-model="gender">
+        <span class="FormFields__RadioLabel">Female</span>
       </label>
     </div>
     <button
-      class="Form__Btn"
+      class="FormFields__Btn"
       type="submit"
     >Find out</button>
   </form>
@@ -78,9 +73,10 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.Form {
+.FormFields {
   background: #fff;
   padding: 2rem;
+  box-shadow: rgba(0,0,0,.05) 0 0 0 1px, rgba(0,0,0,.05) 0 0 10px
 
   &__Heading {
     margin: 0 0 0.5rem;
@@ -93,24 +89,44 @@ export default {
 
   &__Lead {
     opacity: .7;
-    margin: 0 0 1rem;
+    margin: 0 0 2rem;
   }
 
   &__Field {
     margin: 1rem 0;
+    border: rgba(0,0,0,.1) solid 1px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__FieldMask {
+    padding: 0.25rem 0 0.5rem 0.75rem;
+    font-weight: bold;
+    opacity: .5
   }
 
   &__FieldLabel {
     display: block;
     text-align: left;
+    padding: 0.5rem 0 0 0.75rem
+    font-size: 0.875rem;
+    opacity: .5;
+    width: 100%;
   }
 
   &__FieldInput {
     display: block;
     width: 100%;
-    padding: 1rem;
-    border: rgba(0,0,0,.1) solid 1px;
+    padding: 0.25rem 0.75rem 0.5rem;
+    border: 0;
+    background: transparent;
     appearance: none;
+    font-weight: bold;
+    flex: 1;
+
+    .FormFields__FieldMask + & {
+      padding-left: 0.35rem;
+    }
 
     &:focus {
       outline: 0;
@@ -124,17 +140,18 @@ export default {
     padding: 1rem 2rem;
     color: #fff;
     border: 0;
-    box-shadow: inset rgba(0,0,0,.15) 0 -3px 0;
+    box-shadow: inset rgba(0,0,0,.15) 0 -2px 0;
     font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    width: 100%;
 
     &:hover,
     &:active,
     &:focus {
       outline: 0;
-      box-shadow: inset rgba(0,0,0,.15) 0 -3px 0, rgba(0,0,0,.125) 0 2px 1rem;
+      box-shadow: inset rgba(0,0,0,.15) 0 -2px 0, rgba(0,0,0,.125) 0 2px 1rem;
     }
   }
 
@@ -151,6 +168,10 @@ export default {
     background: rgba(0,0,0,.05);
 
     &.-active {
+      background: rgba(0,0,0,.15);
+    }
+
+    &:hover:not(.-active) {
       background: rgba(0,0,0,.1);
     }
 
@@ -171,6 +192,7 @@ export default {
 
   &__RadioLabel {
     display: block;
+    font-weight: bold;
   }
 }
 </style>
