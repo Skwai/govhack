@@ -1,9 +1,13 @@
 <template>
+
   <form class="FormFields" @submit.prevent="submit">
-    <h2 class="FormFields__Heading">About You</h2>
-    <p class="FormFields__Lead">Lorem ipsum dolor sit amet consectuor</p>
+    <header class="FormFields__Header">
+      <svg class="FormFields__Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="#333" stroke-width="1" stroke-miterlimit="10"><path d="M12 17.3c-.7.4-1.8.7-3 .7-2.2 0-4-.9-4-2 0-.6.5-1.1 1.4-1.5" data-cap="butt"/><path d="M12 14.3c-.7.4-1.8.7-3 .7-2.2 0-4-.9-4-2 0-.6.5-1.1 1.3-1.5" data-cap="butt"/><path d="M12 11.3c-.7.4-1.8.7-3 .7-2.2 0-4-.9-4-2 0-.6.5-1.1 1.4-1.5m5.2-3c.9.4 1.4.9 1.4 1.5 0 1.1-1.8 2-4 2s-4-.9-4-2c0-.6.5-1.1 1.4-1.5" data-cap="butt"/><ellipse cx="9" cy="4" stroke-linecap="square" rx="4" ry="2"/><path d="M17.6 17.5c.8.4 1.4.9 1.4 1.5 0 1.1-1.8 2-4 2s-4-.9-4-2c0-.6.5-1.1 1.4-1.5" data-cap="butt"FormFields__/><path d="M17.7 14.5c.8.4 1.3.9 1.3 1.5 0 1.1-1.8 2-4 2s-4-.9-4-2c0-.6.5-1.1 1.4-1.5" data-cap="butt"FormFields__/><path d="M17.6 11.5c.8.4 1.4.9 1.4 1.5 0 1.1-1.8 2-4 2s-4-.9-4-2c0-.6.5-1.1 1.4-1.5" data-cap="butt"FormFields__/><ellipse cx="15" cy="10"FormFields__ stroke-linecap="square" rx="4" ry="2"/></g></svg>
+      <h1 class="FormFields__Heading">PoorScore</h1>
+    </header>
+    <p class="FormFields__Lead">Find out how your income compares to others.</p>
     <label class="FormFields__Field">
-      <span class="FormFields__FieldLabel">Yearly Income</span>
+      <span class="FormFields__FieldLabel">Your Yearly Income</span>
       <span class="FormFields__FieldMask">$</span>
       <input
         type="number"
@@ -50,6 +54,7 @@
       class="FormFields__Btn"
       type="submit"
     >Find out</button>
+    <p><small>* We don't store any of your details</small></p>
   </form>
 </template>
 
@@ -78,10 +83,6 @@ export default {
   padding: 2rem;
   box-shadow: rgba(0,0,0,.05) 0 0 0 1px, rgba(0,0,0,.05) 0 0 10px
 
-  &__Heading {
-    margin: 0 0 0.5rem;
-  }
-
   @media (min-width: 640px) {
     flex: 0 0 24rem;
     min-height: 100vh;
@@ -90,6 +91,24 @@ export default {
   &__Lead {
     opacity: .7;
     margin: 0 0 2rem;
+  }
+
+  &__Header {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__Heading {
+    margin: 0;
+    letter-spacing: -0.035em
+  }
+
+  &__Logo {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 0.5rem;
   }
 
   &__Field {
@@ -146,6 +165,7 @@ export default {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     width: 100%;
+    margin: 1rem 0;
 
     &:hover,
     &:active,

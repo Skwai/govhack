@@ -83,6 +83,10 @@ textarea {
   -moz-osx-font-smoothing: grayscale;
 }
 
+small {
+  opacity: .5
+}
+
 .App {
   text-align: center;
   background: #f1f2f3;
