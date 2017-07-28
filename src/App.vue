@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <hello></hello>
   </div>
 </template>
 
 <script>
 import Hello from './components/Hello';
+import SheetsService from './services/Sheets';
 
 export default {
   name: 'app',
   components: {
     Hello,
+  },
+  async created() {
+    const sheets = new SheetsService({
+      cols: ['Foo', 'Bar', 'Baz'],
+      sheetId: '1zTEOWAzYieJcicqoRvWZfkIPx1oUcq7H8LIGSIdyzgk',
+    });
+    const rows = await sheets.loadData();
+    console.log(rows);
   },
 };
 </script>
