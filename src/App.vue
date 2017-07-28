@@ -16,7 +16,7 @@ export default {
   async created() {
     const sheets = new SheetsService({
       cols: ['Foo', 'Bar', 'Baz'],
-      sheetId: '1zTEOWAzYieJcicqoRvWZfkIPx1oUcq7H8LIGSIdyzgk',
+      sheetId: '1xnKLKn-eVDguXzArz9uHbT3ACeLfYSBzmmB0DAy0dvM',
     });
     const rows = await sheets.loadData();
     console.log(rows);
