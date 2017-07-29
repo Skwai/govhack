@@ -135,6 +135,5 @@ export default {
       background: rgba(0,0,0,.05);
     }
   }
-
 }
 </style>

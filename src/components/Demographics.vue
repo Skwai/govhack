@@ -2,8 +2,11 @@
   <div class="Chart">
     <div class="Chart__Intro">
       <div class="Chart__Header">
-        <h3 class="Chart__Heading">{{label}}</h3>
-        <p class="Chart__Description">{{description}}</p>
+        <h3 class="Chart__Heading">Demographics</h3>
+        <p class="Chart__Description">Lorem ipsum dolor sit amet
+
+
+</p>
       </div>
       <div class="Chart__Filters">
         <FilterField
@@ -70,7 +73,7 @@ export default {
 <style scoped lang="stylus">
 .Chart {
   text-align: left;
-  margin: 3rem 0;
+  margin: 20vh 0;
 
   &__Intro {
     display: flex;

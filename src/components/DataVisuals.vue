@@ -6,23 +6,31 @@
 
     <DataSummary></DataSummary>
 
-    <Chart
+    <Demographics
       label="Demographics"
       description="Lorem ipsum dolor sit amet"
     >
-    </Chart>
+    </Demographics>
+
+    <Postcodes
+      label="Demographics"
+      description="Lorem ipsum dolor sit amet"
+    >
+    </Postcodes>
 
   </article>
 </template>
 
 <script>
 import DataSummary from './DataSummary';
-import Chart from './Chart';
+import Demographics from './Demographics';
+import Postcodes from './Postcodes';
 
 export default {
   components: {
     DataSummary,
-    Chart,
+    Demographics,
+    Postcodes,
   },
 };
 </script>
