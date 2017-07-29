@@ -18,10 +18,18 @@ export default {
   props: ['label', 'description'],
   data() {
     return {
-      labels: {
-        You: 60123,
-        Avg: 68324,
-      },
+      labels: [
+        {
+          name: 'You',
+          value: 60123,
+          placement: 'top',
+        },
+        {
+          name: 'Avg',
+          value: 60123,
+          placement: 'bottom',
+        },
+      ],
     };
   },
   components: {

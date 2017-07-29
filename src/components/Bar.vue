@@ -2,10 +2,9 @@
   <div class="Bar">
     <div class="Bar__MinMax" :style="{ left: `${offsetMin}%`, right: `${offsetMax}%` }"></div>
     <BarLabel
-      v-for="(value, label) in labels"
-      :key="label"
+      v-for="(label, index) in positionedLabels"
+      :key="index"
       :label="label"
-      :value="label"
     ></BarLabel>
   </div>
 </template>
@@ -23,6 +22,14 @@ export default {
     },
     offsetMax() {
       return 100 - ((this.max / BAR_MAX) * 100);
+    },
+    positionedLabels() {
+      return this.labels.map((label) => {
+        const { value } = this;
+        /* eslint-disable no-param-reassign */
+        label.placement = value >= BAR_MAX ? 1 : value / BAR_MAX;
+        return label;
+      });
     },
   },
   components: {
