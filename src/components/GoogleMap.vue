@@ -19,10 +19,17 @@ export default {
         ['State', 'Average Salary'],
       ];
       StatsService.getStateStats()
-        .forEach(s => table.push([`AU-${s.state}`, `$${Number(s.avg.toFixed()).toLocaleString()}`]));
+        .forEach(s => table.push([`AU-${s.state}`, Number(s.avg.toFixed())]));
       console.log(table);
       const data = window.google.visualization.arrayToDataTable(table);
-      const options = { region: 'AU', resolution: 'provinces' };
+      const options = {
+        region: 'AU',
+        resolution: 'provinces',
+        colors: ['#499aff'],
+        backgroundColor: {
+          fill: '#f1f2f3',
+        },
+      };
       const chart = new window.google.visualization.GeoChart(this.$el);
 
       chart.draw(data, options);

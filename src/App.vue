@@ -149,7 +149,9 @@ small {
   &__Form {
     background: #fff;
     padding: 2rem;
-    box-shadow: rgba(0,0,0,.05) 0 0 0 1px, rgba(0,0,0,.05) 0 0 10px
+    box-shadow: rgba(0,0,0,.05) 0 0 0 1px, rgba(0,0,0,.05) 0 0 10px;
+    position: relative;
+    z-index: 2;
 
     @media (min-width: 640px) {
       flex: 0 0 24rem;
