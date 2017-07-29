@@ -12,7 +12,7 @@
 <script>
 import BarLabel from './BarLabel';
 
-const BAR_MAX = 200000;
+const BAR_MAX = 150000;
 
 export default {
   props: ['min', 'max', 'labels'],
