@@ -68,6 +68,7 @@ export default {
     border-radius: 3px;
     font-size: 0.875rem;
     opacity: .8;
+    white-space: nowrap;
 
     &:hover,
     &:active,
