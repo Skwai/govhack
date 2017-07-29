@@ -65,7 +65,7 @@ export default {
         // defaults to make testing easier
         income: '60,000',
         postcode: 7000,
-        age: 24,
+        age: '24',
         gender: 'Male',
       },
     };

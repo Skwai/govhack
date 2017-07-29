@@ -11,7 +11,7 @@
  * min/max
  *
  */
-export default class StatsService {
+class StatsService {
   constructor({
                 ageData = [],
                 postcodeData = [],
@@ -20,16 +20,6 @@ export default class StatsService {
       ageData,
       postcodeData,
     });
-
-    try {
-      this.calculateStats();
-      console.log(`avgMedSalary: ${this.avgMedSalary}`);
-      console.log(`avgAvgSalary: ${this.avgAvgSalary}`);
-      console.log(`medAvgSalary: ${this.medAvgSalary}`);
-      console.log(`medMedSalary: ${this.medMedSalary}`);
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   calculateStats() {
@@ -43,12 +33,18 @@ export default class StatsService {
     this.avgMedSalary = totalMedSalary / this.postcodeData.length;
     this.medAvgSalary = StatsService.getMedian(medSals);
     this.medMedSalary = StatsService.getMedian(avgSals);
+
+    console.log(`avgMedSalary: ${this.avgMedSalary}`);
+    console.log(`avgAvgSalary: ${this.avgAvgSalary}`);
+    console.log(`medAvgSalary: ${this.medAvgSalary}`);
+    console.log(`medMedSalary: ${this.medMedSalary}`);
   }
 
-  postcode(code) {
-    const state = this.getState(code);
+  getPostcodeStats({ postcode, state }) {
+    // const state = this.getState(code);
 
-    const data = this.postcodeData.find(el => el.Postcode === code);
+    debugger;
+    const data = this.postcodeData.find(el => StatsService.toInt(el.Postcode) === postcode);
     const median = StatsService.toInt(data.Median);
 
     const raw = this.postcodeData
@@ -70,7 +66,7 @@ export default class StatsService {
     return maybeState ? maybeState.State : null;
   }
 
-  dempgraphics({ age, gender, state }) {
+  getDempgraphicsStats({ age, gender, state }) {
     const data = this.ageData.filter((el) => {
       const t1 = gender ? el.Gender.toLowerCase() === gender.toLowerCase() : true;
       const t2 = state ? el.State.toLowerCase() === state.toLowerCase() : true;
@@ -105,3 +101,7 @@ export default class StatsService {
     return Number(str.replace(/,/g, ''));
   }
 }
+
+const statsService = new StatsService({});
+
+export default statsService;

@@ -42,8 +42,10 @@ export default {
   methods: {
     updateProfile(profile) {
       this.profile = profile;
-      this.profile.state = this.stats.getState(profile.postcode);
+      this.profile.state = StatsService.getState(profile.postcode);
       console.log(profile);
+      console.log(StatsService.getDempgraphicsStats(profile));
+      console.log(StatsService.getPostcodeStats(profile));
     },
   },
   components: {
@@ -67,7 +69,9 @@ export default {
 
       const postcodeRows = await postcode.loadData();
       const ageRows = await age.loadData();
-      this.stats = new StatsService({ ageData: ageRows, postcodeData: postcodeRows });
+      StatsService.ageData = ageRows;
+      StatsService.postcodeData = postcodeRows;
+      StatsService.calculateStats();
     } catch (err) {
       this.error = ERROR_MESSAGE;
     } finally {
