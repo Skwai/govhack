@@ -1,7 +1,5 @@
 <template>
-
   <form class="FormFields" @submit.prevent="submit">
-    <AppHeader></AppHeader>
     <p class="FormFields__Lead">Find out how your income compares to others.</p>
     <label class="FormFields__Field">
       <span class="FormFields__FieldLabel">Your Yearly Income</span>
@@ -56,13 +54,8 @@
 </template>
 
 <script>
-import AppHeader from './AppHeader';
-
 export default {
   props: ['submitted'],
-  components: {
-    AppHeader,
-  },
   data() {
     return {
       income: null,
@@ -81,15 +74,6 @@ export default {
 
 <style scoped lang="stylus">
 .FormFields {
-  background: #fff;
-  padding: 2rem;
-  box-shadow: rgba(0,0,0,.05) 0 0 0 1px, rgba(0,0,0,.05) 0 0 10px
-
-  @media (min-width: 640px) {
-    flex: 0 0 24rem;
-    min-height: 100vh;
-  }
-
   &__Lead {
     opacity: .7;
     margin: 0 0 2rem;

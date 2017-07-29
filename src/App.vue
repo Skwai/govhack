@@ -1,6 +1,9 @@
 <template>
   <div class="App">
-    <FormFields :submitted="updateProfile"></FormFields>
+    <div class="App__Form">
+      <AppHeader></AppHeader>
+      <FormFields :submitted="updateProfile"></FormFields>
+    </div>
     <div class="App__Content">
       <Loading v-if="loading"></Loading>
       <Error v-if="error" :error="error"></Error>
@@ -10,6 +13,7 @@
 </template>
 
 <script>
+import AppHeader from './components/AppHeader';
 import FormFields from './components/FormFields';
 import Loading from './components/Loading';
 import Error from './components/Error';
@@ -37,6 +41,7 @@ export default {
     Loading,
     Error,
     DataVisuals,
+    AppHeader,
   },
   async created() {
     try {
@@ -112,6 +117,17 @@ small {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  &__Form {
+    background: #fff;
+    padding: 2rem;
+    box-shadow: rgba(0,0,0,.05) 0 0 0 1px, rgba(0,0,0,.05) 0 0 10px
+
+    @media (min-width: 640px) {
+      flex: 0 0 24rem;
+      min-height: 100vh;
+    }
   }
 
 }
