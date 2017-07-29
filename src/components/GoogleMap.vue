@@ -7,13 +7,11 @@ import config from '../config';
 import StatsService from '../services/Stats';
 
 export default {
-  props: [],
   mounted() {
     window.google.charts.load('current', {
       packages: ['geochart'],
       mapsApiKey: config.MAPS_API_KEY,
     });
-
     window.google.charts.setOnLoadCallback(() => {
       const table = [
         ['State', 'Average Salary'],
@@ -35,8 +33,6 @@ export default {
       chart.draw(data, options);
     });
   },
-
-  methods: {},
 };
 </script>
 

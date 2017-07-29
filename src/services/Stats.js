@@ -62,8 +62,7 @@ class StatsService {
     return states.map(s => ({
       state: s,
       avg: this.getStatesforState(s),
-    }),
-    );
+    }));
   }
 
   getStatesforState(state) {
@@ -82,11 +81,10 @@ class StatsService {
   }
 
   getBottomPostcodes(num) {
-    const sorted = this.postcodeData.sort(
-      (a, b) => StatsService.toInt(a.Median) - (StatsService.toInt(b.Median)),
-    );
-    return sorted.splice(0, num).map(
-      el => ({ postcode: el.Postcode, state: el.State, median: el.Median }));
+    const sorted = this.postcodeData.sort((a, b) =>
+      StatsService.toInt(a.Median) - (StatsService.toInt(b.Median)));
+    return sorted.splice(0, num).map(el =>
+      ({ postcode: el.Postcode, state: el.State, median: el.Median }));
   }
 
   getState(postcode) {
@@ -94,7 +92,7 @@ class StatsService {
     return maybeState ? maybeState.State : null;
   }
 
-  getDempgraphicsStats({ age, gender, state }) {
+  getDemographicsStats({ age, gender, state }) {
     const data = this.ageData.filter((el) => {
       const t1 = gender ? el.Gender.toLowerCase() === gender.toLowerCase() : true;
       const t2 = state ? el.State.toLowerCase() === state.toLowerCase() : true;

@@ -24,7 +24,7 @@ import GoogleMap from './GoogleMap';
 export default {
   props: [],
   data() {
-    const { average, min, max } = StatsService.getDempgraphicsStats({});
+    const { average, min, max } = StatsService.getDemographicsStats({});
     return {
       average,
       min,
