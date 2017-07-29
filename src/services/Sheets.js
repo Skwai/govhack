@@ -34,7 +34,7 @@ export default class SheetsService {
 
   serializeRow(row) {
     return this.cols.reduce((obj, col) => {
-      const name = `gsx$${col.toLowerCase()}`;
+      const name = `gsx$${col.toLowerCase().replace(' ', '')}`;
       const value = row[name].$t;
       return Object.assign({}, obj, { [col]: value });
     }, {});
