@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 900px; height: 500px;"></div>
+  <div class="GoogleMap"></div>
 </template>
 
 <script>
@@ -18,7 +18,8 @@ export default {
       const table = [
         ['State', 'Average Salary'],
       ];
-      StatsService.getStateStats().forEach(s => table.push([`AU-${s.state}`, s.avg]));
+      StatsService.getStateStats()
+        .forEach(s => table.push([`AU-${s.state}`, `$${Number(s.avg.toFixed()).toLocaleString()}`]));
       console.log(table);
       const data = window.google.visualization.arrayToDataTable(table);
       const options = { region: 'AU', resolution: 'provinces' };
@@ -31,3 +32,11 @@ export default {
   methods: {},
 };
 </script>
+
+<style scoped>
+.GoogleMap {
+  width: 100%;
+  height: 100vh;
+  margin: -2rem -2rem -2rem -2rem;
+}
+</style>

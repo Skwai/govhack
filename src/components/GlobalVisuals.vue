@@ -1,8 +1,5 @@
 <template>
   <article class="GlobalVisuals">
-    <header>
-      <h2>Some global things go here</h2>
-    </header>
     <GoogleMap />
     <!--The average wage is ${{average.toFixed(0)}}<br>-->
 
