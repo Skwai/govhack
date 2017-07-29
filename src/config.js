@@ -25,4 +25,8 @@ export default {
     'VIC',
     'WA',
   ],
+  GENDERS: [
+    'Male',
+    'Female',
+  ],
 };
