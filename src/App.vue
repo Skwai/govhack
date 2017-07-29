@@ -7,7 +7,8 @@
     <div class="App__Content">
       <Loading v-if="loading"></Loading>
       <Error v-if="error" :error="error"></Error>
-      <DataVisuals :profile="profile" v-if="showData"></DataVisuals>
+      <DataVisuals :profile="profile" v-if="hasProfile"></DataVisuals>
+      <GlobalVisuals v-if="showOverview"></GlobalVisuals>
     </div>
   </main>
 </template>
@@ -18,6 +19,7 @@ import FormFields from './components/FormFields';
 import Loading from './components/Loading';
 import Error from './components/Error';
 import DataVisuals from './components/DataVisuals';
+import GlobalVisuals from './components/GlobalVisuals';
 
 import SheetsService from './services/Sheets';
 import StatsService from './services/Stats';
@@ -35,8 +37,11 @@ export default {
     };
   },
   computed: {
-    showData() {
-      return !this.loading && !this.error && this.profile;
+    hasProfile() {
+      return this.profile;
+    },
+    showOverview() {
+      return !this.loading && !this.error && !this.profile;
     },
   },
   methods: {
@@ -50,6 +55,7 @@ export default {
     Error,
     DataVisuals,
     AppHeader,
+    GlobalVisuals,
   },
   async created() {
     try {
