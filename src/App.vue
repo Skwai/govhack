@@ -20,6 +20,8 @@ import Error from './components/Error';
 import DataVisuals from './components/DataVisuals';
 
 import SheetsService from './services/Sheets';
+import StatsService from './services/Stats';
+
 
 const ERROR_MESSAGE = 'Couldn\'t load data :(';
 
@@ -28,8 +30,7 @@ export default {
     return {
       loading: true,
       error: null,
-      ageRows: [],
-      postcodeRows: [],
+      stats: null,
       profile: null,
     };
   },
@@ -58,16 +59,14 @@ export default {
         sheetId: '112usd1vZmqUsTyqS_Qo4aKlI9DxZ8p4k2c4rVC3oVCI',
       });
 
-      this.ageRows = await age.loadData();
-      console.log(`ageRows: ${this.ageRows.length}`);
-
       const postcode = new SheetsService({
         cols: ['Postcode', 'Average', 'Median'],
         sheetId: '1716gXW9rhxUCkcpzt7Wgy7B-Z55AdNELEH_XZ4PNYHs',
       });
 
-      this.postcodeRows = await postcode.loadData();
-      console.log(`postcodeRows: ${this.postcodeRows.length}`);
+      const postcodeRows = await postcode.loadData();
+      const ageRows = await age.loadData();
+      this.stats = new StatsService({ ageData: ageRows, postcodeData: postcodeRows });
     } catch (err) {
       this.error = ERROR_MESSAGE;
     } finally {
