@@ -97,22 +97,20 @@ export default {
 <style scoped lang="stylus">
 .Chart {
   text-align: left;
-  padding: 2rem;
+  padding: 1.5rem;
   background: #fff;
   box-shadow: rgba(0,0,0,0.05) 0 0 0 1px, rgba(0,0,0,0.05) 0 2px 10px;
 
   &__Intro {
-    display: flex;
-  }
-
-  &__Header {
-    display: flex;
-    align-items: center;
+    @media (min-width: 1024px) {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__Heading {
     margin: 0;
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 
   &__Description {
@@ -122,8 +120,8 @@ export default {
 
   &__Filters {
     display: flex;
-    margin-left: auto;
     align-items: center;
+    margin: 0.5rem 0 0.5rem auto;
 
     > * + * {
       margin-left: 0.5rem;

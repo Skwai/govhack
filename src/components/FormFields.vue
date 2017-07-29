@@ -21,7 +21,7 @@
         <div
           class="FormFields__Option"
           v-for="(age, index) in ages"
-          @click="selectAge(age)"
+          @click="selectAge"
           :class="{'-selected': profile.age === age}"
           :key="index"
         >{{age}}</div>
@@ -76,8 +76,9 @@ export default {
     };
   },
   methods: {
-    selectAge(age) {
-      this.profile.age = age;
+    selectAge(ev) {
+      this.profile.age = ev.target.textContent;
+      ev.stopPropagation();
       this.hideAgeOptions();
     },
     hideAgeOptions() {
@@ -185,12 +186,13 @@ export default {
   &__Radio {
     flex: 1;
     padding: 1rem 2rem;
-    box-shadow: inset rgba(0,0,0,.125) 0 -2px 0
+    box-shadow: inset rgba(0,0,0,.125) 0 -2px 0;
     transition: 0.2s;
     background: rgba(0,0,0,.05);
 
     &.-active {
       background: rgba(0,0,0,.15);
+      box-shadow: inset rgba(0,0,0,.1) 0 2px 10px, inset rgba(0,0,0,.125) 0 -2px 0;
     }
 
     &:hover:not(.-active) {
@@ -232,7 +234,7 @@ export default {
     z-index: 2;
     max-width: 100%;
     font-size: 0.875rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     text-align: left;
 
     &.-open {

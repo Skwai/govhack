@@ -72,7 +72,7 @@ export default {
 
   &__Heading {
     margin: 0;
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 
   &__Description {

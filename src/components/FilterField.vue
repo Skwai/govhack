@@ -4,7 +4,7 @@
       <div class="FilterField__LabelIcon">
         <slot name="icon"></slot>
       </div>
-      {{value}}
+      <div class="FilterField__LabelText">{{value}}</div>
     </button>
     <div class="FilterField__Options">
       <div
@@ -60,14 +60,14 @@ export default {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 0.5rem (0.5rem + 1.25rem + 0.75rem) 0.5rem 0.75rem;
+    padding: 0.5rem (0.5rem + 1.25rem + 0.5rem) 0.5rem 0.75rem;
     background: transparent;
     border: 0;
     cursor: pointer;
     transition: 0.2s;
     border-radius: 3px;
     font-size: 0.875rem;
-    opacity: .8;
+    opacity: .5;
     white-space: nowrap;
 
     &:hover,
@@ -91,12 +91,17 @@ export default {
       transform: translateY(-50%);
     }
 
-    &Icon {
-      margin-right: 1rem;
+    &Text {
+      margin-left: 0.5rem;
+      @media (max-width: 1023px) {
+        display: none;
+      }
+    }
 
+    &Icon {
       svg {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.25rem;
+        height: 1.25rem;
       }
     }
   }
@@ -115,7 +120,7 @@ export default {
     box-shadow: rgba(0,0,0,.2) 0 1px 2px, rgba(0,0,0,.125) 0 2px 1rem;
     z-index: 2;
     font-size: 0.875rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     .-open & {
       transform: scale(1,1)

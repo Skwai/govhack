@@ -34,7 +34,7 @@ export default {
   padding: 0.5rem 0.75rem;
   font-size: 0.8125rem;
   border-radius: 3px;
-  box-shadow: rgba(0,0,0,.1) 0 0 0 1px, rgba(0,0,0,.1) 0 2px 5px;
+  box-shadow: rgba(0,0,0,.15) 0 0 0 1px, rgba(0,0,0,.1) 0 2px 5px;
   position: absolute;
   text-align: center;
   bottom: 100%;
@@ -58,7 +58,7 @@ export default {
 
     &::before {
       border-top: 0;
-      border-bottom: rgba(0,0,0,.1) solid 6px;
+      border-bottom: rgba(0,0,0,.15) solid 6px;
       transform: translate(-50%, -100%);
       margin-top: -1px;
     }
@@ -78,7 +78,7 @@ export default {
     top: 100%;
     width: 0;
     height: 0;
-    border-top: rgba(0,0,0,.1) solid 6px;
+    border-top: rgba(0,0,0,.15) solid 6px;
     border-left: transparent solid 6px;
     border-right: transparent solid 6px;
   }
