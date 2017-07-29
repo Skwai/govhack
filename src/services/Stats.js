@@ -57,6 +57,22 @@ class StatsService {
     };
   }
 
+  getStateStats() {
+    const states = this.postcodeData.map(el => el.State).filter((v, i, s) => s.indexOf(v) === i);
+    return states.map(s => ({
+      state: s,
+      avg: this.getStatesforState(s),
+    }),
+    );
+  }
+
+  getStatesforState(state) {
+    const filtered = this.postcodeData.filter(el => el.State === state);
+    const total = filtered.reduce((sum, value) => sum + StatsService.toInt(value.Average), 0);
+    const count = filtered.length;
+    return total / count;
+  }
+
   getTopPostcodes(num) {
     const sorted = this.postcodeData.sort(
       (a, b) => StatsService.toInt(a.Median) - (StatsService.toInt(b.Median)),

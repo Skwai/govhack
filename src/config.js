@@ -1,5 +1,6 @@
 export default {
   GOOGLE_SHEET_ID: '',
+  MAPS_API_KEY: 'AIzaSyAXKCeBwTPQRBGKiM7Ce8b93z_ykVnhjYU',
   AGES: [
     'a. Under 18',
     'b. 18 - 24',

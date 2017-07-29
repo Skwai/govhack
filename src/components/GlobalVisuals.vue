@@ -3,7 +3,7 @@
     <header>
       <h2>Some global things go here</h2>
     </header>
-
+    <GoogleMap />
     The average wage is ${{average.toFixed(0)}}<br>
 
     The top 10 richest suburbs
@@ -22,6 +22,7 @@
 
 <script>
 import StatsService from '../services/Stats';
+import GoogleMap from './GoogleMap';
 
 export default {
   props: [],
@@ -36,6 +37,7 @@ export default {
     };
   },
   components: {
+    GoogleMap,
   },
 };
 </script>
