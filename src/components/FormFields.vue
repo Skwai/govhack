@@ -16,15 +16,9 @@
     </label>
     <label class="FormFields__Field">
       <span class="FormFields__FieldLabel">Your Age</span>
-      <input
-        type="number"
-        class="FormFields__FieldInput"
-        required
-        min="1"
-        max="130"
-        maxlength="3"
-        v-model="profile.age"
-      >
+      <select v-model="profile.age">
+        <option v-for="age in ages" :value="age">{{age}}</option>
+      </select>
     </label>
     <label class="FormFields__Field">
       <span class="FormFields__FieldLabel">Postcode</span>
@@ -57,17 +51,20 @@
 </template>
 
 <script>
+import config from '../config';
+
 export default {
   props: ['submitted'],
   data() {
     return {
       profile: {
         // defaults to make testing easier
-        income: '60,000',
+        income: 60000,
         postcode: 7000,
-        age: '24',
+        age: 'd. 30 - 34',
         gender: 'Male',
       },
+      ages: config.AGES,
     };
   },
   methods: {
