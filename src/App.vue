@@ -28,7 +28,8 @@ export default {
     return {
       loading: true,
       error: null,
-      rows: [],
+      ageRows: [],
+      postcodeRows: [],
     };
   },
   methods: {
@@ -45,11 +46,21 @@ export default {
   },
   async created() {
     try {
-      const sheets = new SheetsService({
-        cols: ['Foo', 'Bar', 'Baz'],
-        sheetId: '1xnKLKn-eVDguXzArz9uHbT3ACeLfYSBzmmB0DAy0dvM',
+      const age = new SheetsService({
+        cols: ['Gender', 'State', 'Age', 'Count', 'Income Sum', 'Average Income'],
+        sheetId: '112usd1vZmqUsTyqS_Qo4aKlI9DxZ8p4k2c4rVC3oVCI',
       });
-      this.rows = await sheets.loadData();
+
+      this.ageRows = await age.loadData();
+      console.log(`ageRows: ${this.ageRows.length}`);
+
+      const postcode = new SheetsService({
+        cols: ['Postcode', 'Average', 'Median'],
+        sheetId: '1716gXW9rhxUCkcpzt7Wgy7B-Z55AdNELEH_XZ4PNYHs',
+      });
+
+      this.postcodeRows = await postcode.loadData();
+      console.log(`postcodeRows: ${this.postcodeRows.length}`);
     } catch (err) {
       this.error = ERROR_MESSAGE;
     } finally {
