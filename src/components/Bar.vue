@@ -48,6 +48,26 @@ export default {
   border-radius: 3px;
   position: relative;
 
+  &::before,
+  &::after {
+    position: absolute;
+    opacity: .3;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    top: 50%;
+    transform: translateY(-50%)
+  }
+
+  &::before {
+    left: 0.5rem;
+    content: "$0"
+  }
+
+  &::after {
+    right: 0.5rem;
+    content: "$150k";
+  }
+
   &__MinMax {
     background: #499aff;
     height: 100%;
