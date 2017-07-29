@@ -1,7 +1,7 @@
 {
   "name": "govhack",
   "version": "1.0.0",
-  "description": "GovHack project",
+  "description": "WageSage, a Vue.js GovHack project",
   "author": "Cameron <cameron@biteable.com>, Will <will@biteable.com>",
   "private": true,
   "scripts": {
