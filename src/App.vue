@@ -41,8 +41,9 @@ export default {
   },
   methods: {
     updateProfile(profile) {
-      console.log(profile);
       this.profile = profile;
+      this.profile.state = this.stats.getState(profile.postcode);
+      console.log(profile);
     },
   },
   components: {

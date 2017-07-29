@@ -66,7 +66,7 @@ export default class StatsService {
   }
 
   getState(postcode) {
-    const maybeState = this.postcodeData.find(el => el.Postcode === postcode);
+    const maybeState = this.postcodeData.find(el => StatsService.toInt(el.Postcode) === postcode);
     return maybeState ? maybeState.State : null;
   }
 
