@@ -4,7 +4,7 @@
     :class="placementClassName"
     :style="{ left: positionPercent }"
   >
-    <span class="BarLabel__Label">{{label.name}}</span>
+    <span class="BarLabel__Label">{{label.name}}</span>:
     <span class="BarLabel__Value">{{formattedValue}}</span>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     },
     formattedValue() {
       // TODO: abbreviate this number
-      return `$${this.label.value.toLocaleString()}`;
+      return `$${Number(this.label.value.toFixed()).toLocaleString()}`;
     },
   },
 };
@@ -32,18 +32,23 @@ export default {
 .BarLabel {
   background: #fff;
   padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   border-radius: 3px;
-  box-shadow: rgba(0,0,0,.1) 0 1px 1px;
+  box-shadow: rgba(0,0,0,.1) 0 0 0 1px, rgba(0,0,0,.1) 0 2px 5px;
   position: absolute;
   text-align: center;
   bottom: 100%;
-  transform: translate(-50%, -0.75rem);
+  transform: translate(-50%, -0.5rem);
+  transition: 0.2s;
+
+  &:hover {
+    z-index: 2;
+  }
 
   &.-bottom {
     top: 100%;
     bottom: auto;
-    transform: translate(-50%, 0.75rem);
+    transform: translate(-50%, 0.5rem);
 
     &::before,
     &::after {
@@ -55,6 +60,7 @@ export default {
       border-top: 0;
       border-bottom: rgba(0,0,0,.1) solid 6px;
       transform: translate(-50%, -100%);
+      margin-top: -1px;
     }
 
     &::after {
@@ -90,11 +96,6 @@ export default {
       border-bottom: #fff solid 6px;
       transform: translate(-50%, 0);
     }
-  }
-
-  &__Label,
-  &__Value {
-    display: block;
   }
 
   &__Label {

@@ -135,6 +135,11 @@ small {
   display: flex;
   min-height: 100vh;
   overflow: hidden;
+  flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
 
   &__Content {
     padding: 2rem;
@@ -152,6 +157,7 @@ small {
     box-shadow: rgba(0,0,0,.05) 0 0 0 1px, rgba(0,0,0,.05) 0 0 10px;
     position: relative;
     z-index: 2;
+    flex: 0 0 100%;
 
     @media (min-width: 640px) {
       flex: 0 0 24rem;

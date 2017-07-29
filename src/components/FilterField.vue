@@ -102,7 +102,7 @@ export default {
 
   &__Options {
     background: #fff;
-    width: 100%;
+    min-width: 100%;
     position: absolute;
     transition: 0.2s;
     transform: scale(0,0);
@@ -113,8 +113,8 @@ export default {
     left: 0;
     box-shadow: rgba(0,0,0,.2) 0 1px 2px, rgba(0,0,0,.125) 0 2px 1rem;
     z-index: 2;
-    max-width: 100%;
     font-size: 0.875rem;
+    overflow-y: scroll;
 
     .-open & {
       transform: scale(1,1)
@@ -126,6 +126,7 @@ export default {
     cursor: pointer;
     padding: 0.5rem 0.75rem;
     transition: 0.2s;
+    white-space: nowrap;
 
     &.-selected {
       color: #499aff;

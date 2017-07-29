@@ -16,4 +16,13 @@ export default {
     '70 - 74',
     '75 and over',
   ],
+  STATES: [
+    'TAS',
+    'NT',
+    'SA',
+    'ACT',
+    'NSW',
+    'VIC',
+    'WA',
+  ],
 };

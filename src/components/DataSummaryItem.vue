@@ -12,8 +12,6 @@
 <script>
 export default {
   props: ['label', 'value', 'description'],
-
-
 };
 </script>
 
@@ -48,7 +46,7 @@ export default {
   }
 
   &__Value {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
     margin-left: 0.5rem;
 
@@ -59,6 +57,7 @@ export default {
 
   &__Description {
     opacity: .5;
+    font-size: 0.875rem;
   }
 }
 

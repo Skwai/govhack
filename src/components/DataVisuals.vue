@@ -1,7 +1,7 @@
 <template>
   <article class="DataVisuals">
     <header>
-      <h2>Here's how you compare&hellip;</h2>
+      <h2>How you compare&hellip;</h2>
     </header>
 
     <DataSummary :profile="profile"></DataSummary>
@@ -9,6 +9,7 @@
     <Demographics
       label="Demographics"
       description="Lorem ipsum dolor sit amet"
+      :profile="profile"
     >
     </Demographics>
 

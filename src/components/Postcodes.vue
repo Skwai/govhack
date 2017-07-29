@@ -2,8 +2,7 @@
   <div class="Chart">
     <div class="Chart__Intro">
       <div class="Chart__Header">
-        <h3 class="Chart__Heading">Postcode</h3>
-        <p class="Chart__Description">Lorem ipsum dolor sit amet</p>
+        <h3 class="Chart__Heading">Your Postcode</h3>
       </div>
       <div class="Chart__Filters">
         <FilterField
@@ -16,8 +15,8 @@
     </div>
 
     <Bar
-      :min="24000"
-      :max="92000"
+      :min="17000"
+      :max="98000"
       :labels="labels"
     ></Bar>
   </div>

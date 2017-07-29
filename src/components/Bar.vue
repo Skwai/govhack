@@ -44,15 +44,16 @@ export default {
 .Bar {
   background: rgba(0,0,0,.05);
   height: 2rem;
+  margin: 3rem 0;
   border-radius: 3px;
   position: relative;
-  margin: 5rem 0;
 
   &__MinMax {
     background: #499aff;
-    height: 2rem;
+    height: 100%;
     border-radius: 3px;
     position: absolute;
+    transition: 0.2s;
   }
 }
 </style>
