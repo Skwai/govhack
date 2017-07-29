@@ -1,5 +1,5 @@
 <template>
-  <div class="App">
+  <main class="App">
     <div class="App__Form">
       <AppHeader></AppHeader>
       <FormFields :submitted="updateProfile"></FormFields>
@@ -9,7 +9,7 @@
       <Error v-if="error" :error="error"></Error>
       <DataVisuals v-if="showData"></DataVisuals>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     showData() {
-      return !this.loading && !this.error && this.profile;
+      return !this.loading && !this.error; // && this.profile;
     },
   },
   methods: {
@@ -112,6 +112,7 @@ button,
 textarea {
   color: #333;
   font-size: 1rem;
+  line-height: 1.375;
   font-family: 'Lato', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -126,12 +127,14 @@ small {
   background: #f1f2f3;
   display: flex;
   min-height: 100vh;
+  overflow: hidden;
 
   &__Content {
-    padding: 1rem;
+    padding: 2rem;
     width: 100%;
     min-height: 100vh;
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
   }

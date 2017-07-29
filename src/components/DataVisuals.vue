@@ -1,11 +1,30 @@
 <template>
-  <div class="DataVisuals">
-    Data goes here
-  </div>
+  <article class="DataVisuals">
+    <header>
+      <h2>Here's how you compare&hellip;</h2>
+    </header>
+
+    <DataSummary></DataSummary>
+
+    <Chart
+      label="Demographics"
+      description="Lorem ipsum dolor sit amet"
+    >
+    </Chart>
+
+  </article>
 </template>
 
 <script>
-export default {};
+import DataSummary from './DataSummary';
+import Chart from './Chart';
+
+export default {
+  components: {
+    DataSummary,
+    Chart,
+  },
+};
 </script>
 
 <style scoped lang="stylus">
