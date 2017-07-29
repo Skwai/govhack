@@ -9,7 +9,7 @@
         class="FormFields__FieldInput"
         required
         maxlength="10"
-        v-model="income"
+        v-model="profile.income"
       >
     </label>
     <label class="FormFields__Field">
@@ -21,7 +21,7 @@
         min="1"
         max="130"
         maxlength="3"
-        v-model="age"
+        v-model="profile.age"
       >
     </label>
     <label class="FormFields__Field">
@@ -32,16 +32,16 @@
         required
         minlength="4"
         maxlength="4"
-        v-model="postcode"
+        v-model="profile.postcode"
       >
     </label>
     <div class="FormFields__RadioGroup">
-      <label class="FormFields__Radio" :class="{ '-active': gender === 'Male' }">
-        <input class="FormFields__RadioInput" type="radio" value="Male" v-model="gender">
+      <label class="FormFields__Radio" :class="{ '-active': profile.gender === 'Male' }">
+        <input class="FormFields__RadioInput" type="radio" value="Male" v-model="profile.gender">
         <span class="FormFields__RadioLabel">Male</span>
       </label>
-      <label class="FormFields__Radio" :class="{ '-active': gender === 'Female' }">
-        <input class="FormFields__RadioInput" type="radio" value="Female" v-model="gender">
+      <label class="FormFields__Radio" :class="{ '-active': profile.gender === 'Female' }">
+        <input class="FormFields__RadioInput" type="radio" value="Female" v-model="profile.gender">
         <span class="FormFields__RadioLabel">Female</span>
       </label>
     </div>
@@ -58,15 +58,17 @@ export default {
   props: ['submitted'],
   data() {
     return {
-      income: null,
-      postcode: null,
-      gender: 'Male',
-      industry: null,
+      profile: {
+        income: null,
+        postcode: null,
+        gender: 'Male',
+        industry: null,
+      },
     };
   },
   methods: {
     submit() {
-      console.log(this.data);
+      this.submitted(this.profile);
     },
   },
 };

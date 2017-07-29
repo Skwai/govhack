@@ -7,9 +7,6 @@ export default class SheetsService {
     sheetId = '',
   }) {
     Object.assign(this, {
-      rows: [],
-      loading: null,
-      loaded: false,
       cols,
       sheetId,
     });
@@ -19,8 +16,6 @@ export default class SheetsService {
     try {
       const data = await this.fetchData();
       const rows = this.serializeData(data);
-      this.rows = rows;
-      this.loaded = true;
       return rows;
     } catch (err) {
       throw err;
@@ -36,7 +31,7 @@ export default class SheetsService {
     return this.cols.reduce((obj, col) => {
       const name = `gsx$${col.toLowerCase().replace(' ', '')}`;
       const value = row[name].$t;
-      return Object.assign({}, obj, { [col]: value });
+      return Object.assign(obj, { [col]: value });
     }, {});
   }
 

@@ -30,11 +30,13 @@ export default {
       error: null,
       ageRows: [],
       postcodeRows: [],
+      profile: null,
     };
   },
   methods: {
-    updateProfile({ gender, age, postcode, salary }) {
-      console.log(gender, age, postcode, salary);
+    updateProfile(profile) {
+      console.log(profile);
+      this.profile = profile;
     },
   },
   components: {
