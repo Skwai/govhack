@@ -60,7 +60,7 @@ export default {
       });
 
       const postcode = new SheetsService({
-        cols: ['Postcode', 'Average', 'Median'],
+        cols: ['State', 'Postcode', 'Average', 'Median'],
         sheetId: '1716gXW9rhxUCkcpzt7Wgy7B-Z55AdNELEH_XZ4PNYHs',
       });
 

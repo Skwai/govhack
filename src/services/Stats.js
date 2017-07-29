@@ -1,5 +1,15 @@
 /**
  * A service to calculate Stats
+ *
+ * gender/age/state
+ * avg
+ * min/max
+ *
+ * Postcode
+ * state Avg
+ * postcode Avg
+ * min/max
+ *
  */
 export default class StatsService {
   constructor({
@@ -17,59 +27,70 @@ export default class StatsService {
       console.log(`avgAvgSalary: ${this.avgAvgSalary}`);
       console.log(`medAvgSalary: ${this.medAvgSalary}`);
       console.log(`medMedSalary: ${this.medMedSalary}`);
-
-      this.combine({ gender: 'Female' });
     } catch (err) {
       console.log(err);
     }
   }
 
   calculateStats() {
-    const medSals = this.postcodeData.map(el => this.constructor.toInt(el.Average));
-    const avgSals = this.postcodeData.map(el => this.constructor.toInt(el.Median));
+    const medSals = this.postcodeData.map(el => StatsService.toInt(el.Average));
+    const avgSals = this.postcodeData.map(el => StatsService.toInt(el.Median));
 
     const totalAvgSalary = medSals.reduce((sum, value) => sum + value, 0);
     const totalMedSalary = avgSals.reduce((sum, value) => sum + value, 0);
 
     this.avgAvgSalary = totalAvgSalary / this.postcodeData.length;
     this.avgMedSalary = totalMedSalary / this.postcodeData.length;
-
-    this.medAvgSalary = this.constructor.getMedian(medSals);
-    this.medMedSalary = this.constructor.getMedian(avgSals);
+    this.medAvgSalary = StatsService.getMedian(medSals);
+    this.medMedSalary = StatsService.getMedian(avgSals);
   }
 
   postcode(code) {
+    const state = this.getState(code);
+
     const data = this.postcodeData.find(el => el.Postcode === code);
-    return data;
+    const median = StatsService.toInt(data.Median);
+
+    const raw = this.postcodeData
+      .filter(el => el.State === state)
+      .map(el => StatsService.toInt(el.Median));
+
+    const min = Math.min(...raw);
+    const max = Math.max(...raw);
+
+    return {
+      median,
+      min,
+      max,
+    };
   }
 
-  combine({ age, gender, state }) {
-    console.log(age, gender, state);
-    try {
-      const data = this.ageData.filter((el) => {
-        const t1 = gender ? el.Gender.toLowerCase() === gender.toLowerCase() : true;
-        const t2 = state ? el.State.toLowerCase() === state.toLowerCase() : true;
-        const t3 = age ? el.Age.toLowerCase() === age.toLowerCase() : true;
-        return t1 && t2 && t3;
-      });
+  getState(postcode) {
+    const maybeState = this.postcodeData.find(el => el.Postcode === postcode);
+    return maybeState ? maybeState.State : null;
+  }
 
-      const avg = data.reduce((sum, value) => sum + this.constructor.toInt(value['Average Income']), 0);
-      console.log(avg);
-      console.log(data.length);
-      console.log(avg / data.length);
+  dempgraphics({ age, gender, state }) {
+    const data = this.ageData.filter((el) => {
+      const t1 = gender ? el.Gender.toLowerCase() === gender.toLowerCase() : true;
+      const t2 = state ? el.State.toLowerCase() === state.toLowerCase() : true;
+      const t3 = age ? el.Age.toLowerCase() === age.toLowerCase() : true;
+      return t1 && t2 && t3;
+    });
 
-      const count = data.reduce((sum, value) => sum + this.constructor.toInt(value.Count), 0);
-      const tot = data.reduce((sum, value) => sum + this.constructor.toInt(value['Income Sum']), 0);
+    const count = data.reduce((sum, value) => sum + StatsService.toInt(value.Count), 0);
+    const total = data.reduce((sum, value) => sum + StatsService.toInt(value['Income Sum']), 0);
+    const average = total / count;
 
-      console.log(tot);
-      console.log(count);
-      console.log(tot / count);
+    const raw = data.map(el => StatsService.toInt(el['Average Income']));
+    const min = Math.min(...raw);
+    const max = Math.max(...raw);
 
-      return avg;
-    } catch (err) {
-      console.log(err);
-    }
-    return 0;
+    return {
+      average,
+      min,
+      max,
+    };
   }
 
   static getMedian(args) {
@@ -81,6 +102,6 @@ export default class StatsService {
   }
 
   static toInt(str) {
-    return parseInt(str.replace(/,/g, ''), 10);
+    return Number(str.replace(/,/g, ''));
   }
 }
