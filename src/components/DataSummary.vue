@@ -4,22 +4,20 @@
       <DataSummaryItem
         label="Gender"
         :value="genderAverage"
-        :description="`Compared to the average ${profile.gender}`"
-      ></DataSummaryItem>
+      >Compared to the average <strong>{{profile.gender}}</strong>
+      </DataSummaryItem>
     </div>
     <div class="DataSummary__Item">
       <DataSummaryItem
         label="State"
         :value="stateAverage"
-        :description="`Compared to others living in ${state}`"
-      ></DataSummaryItem>
+      >Compared to others living in <strong>{{state}}</strong></DataSummaryItem>
     </div>
     <div class="DataSummary__Item">
       <DataSummaryItem
         label="Age"
         :value="ageAverage"
-        :description="`Compared to other ${profile.age} year olds`"
-      ></DataSummaryItem>
+      >Compared to other <strong>{{profile.age}}</strong> year olds</DataSummaryItem>
     </div>
   </div>
 </template>

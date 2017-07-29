@@ -5,7 +5,7 @@
       <svg class="DataSummaryItem__Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" d="M2.5 7.5l10 10 10-10" stroke-linecap="square"/></svg>
       <span class="DataSummaryItem__Value">{{Math.abs(value)}}<small>%</small></span>
     </div>
-    <div class="DataSummaryItem__Description">{{description}}</div>
+    <div class="DataSummaryItem__Description"><slot>{{description}}</slot></div>
   </div>
 </template>
 
