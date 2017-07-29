@@ -12,7 +12,7 @@
 <script>
 import BarLabel from './BarLabel';
 
-const BAR_MAX = 150000;
+const BAR_MAX = 130000;
 
 export default {
   props: ['min', 'max', 'labels'],
@@ -65,7 +65,7 @@ export default {
 
   &::after {
     right: 0.5rem;
-    content: "$150k";
+    content: "$130k";
   }
 
   &__MinMax {

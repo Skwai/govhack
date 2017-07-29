@@ -65,7 +65,6 @@ export default {
   display: flex;
   padding: 2rem 0;
   background: #fff;
-  border-radius: 3px;
   box-shadow: rgba(0,0,0,0.05) 0 0 0 1px, rgba(0,0,0,0.05) 0 2px 10px;
 
   &__Item {
