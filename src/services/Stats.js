@@ -41,14 +41,10 @@ class StatsService {
   }
 
   getPostcodeStats({ postcode, state }) {
-    // const state = this.getState(code);
-
-    debugger;
     const data = this.postcodeData.find(el => StatsService.toInt(el.Postcode) === postcode);
     const median = StatsService.toInt(data.Median);
 
-    const raw = this.postcodeData
-      .filter(el => el.State === state)
+    const raw = (state ? (this.postcodeData.filter(el => el.State === state)) : this.postcodeData)
       .map(el => StatsService.toInt(el.Median));
 
     const min = Math.min(...raw);
