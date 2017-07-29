@@ -3,25 +3,22 @@
     <div class="DataSummary__Item">
       <DataSummaryItem
         label="Gender"
-        trend="up"
-        value="22"
-        description="Compared to the average woman"
+        :value="genderAverage"
+        :description="`Compared to the average ${profile.gender}`"
       ></DataSummaryItem>
     </div>
     <div class="DataSummary__Item">
       <DataSummaryItem
-        label="Postcode"
-        trend="down"
-        value="13"
-        description="Compared to others living in 7000"
+        label="State"
+        :value="stateAverage"
+        :description="`Compared to others living in ${state}`"
       ></DataSummaryItem>
     </div>
     <div class="DataSummary__Item">
       <DataSummaryItem
         label="Age"
-        trend="up"
-        value="17"
-        description="Compared to other 18-24 year olds"
+        :value="ageAverage"
+        :description="`Compared to other ${profile.age} year olds`"
       ></DataSummaryItem>
     </div>
   </div>
@@ -29,10 +26,38 @@
 
 <script>
 import DataSummaryItem from './DataSummaryItem';
+import StatsService from '../services/Stats';
 
 export default {
+  props: ['profile'],
+  data() {
+    return {
+      state: StatsService.getState(this.profile.postcode),
+    };
+  },
   components: {
     DataSummaryItem,
+  },
+  watch: {
+    'profile.postcode': function (postcode) {
+      this.state = StatsService.getState(postcode);
+    },
+  },
+  computed: {
+    genderAverage() {
+      const { average } = StatsService.getDempgraphicsStats({ gender: this.profile.gender });
+      return (((this.profile.income / average) * 100) - 100).toFixed(1);
+    },
+    ageAverage() {
+      const { average } = StatsService.getDempgraphicsStats({ age: this.profile.age });
+      return (((this.profile.income / average) * 100) - 100).toFixed(1);
+    },
+    stateAverage() {
+      const { average } = StatsService.getDempgraphicsStats({
+        state: this.state,
+      });
+      return (((this.profile.income / average) * 100) - 100).toFixed(1);
+    },
   },
 };
 </script>

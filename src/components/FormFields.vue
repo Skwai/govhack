@@ -67,8 +67,8 @@ export default {
       showAgeOptions: false,
       profile: {
         // defaults to make testing easier
-        income: 60000,
-        postcode: 7000,
+        income: '60000',
+        postcode: '7000',
         age: 'd. 30 - 34',
         gender: 'Male',
       },

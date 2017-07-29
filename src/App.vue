@@ -7,7 +7,7 @@
     <div class="App__Content">
       <Loading v-if="loading"></Loading>
       <Error v-if="error" :error="error"></Error>
-      <DataVisuals v-if="showData"></DataVisuals>
+      <DataVisuals :profile="profile" v-if="showData"></DataVisuals>
     </div>
   </main>
 </template>
@@ -36,16 +36,12 @@ export default {
   },
   computed: {
     showData() {
-      return !this.loading && !this.error; // && this.profile;
+      return !this.loading && !this.error && this.profile;
     },
   },
   methods: {
     updateProfile(profile) {
       this.profile = profile;
-      this.profile.state = StatsService.getState(profile.postcode);
-      console.log(profile);
-      console.log(StatsService.getDempgraphicsStats(profile));
-      console.log(StatsService.getPostcodeStats(profile));
     },
   },
   components: {

@@ -4,7 +4,7 @@
       <h2>Here's how you compare&hellip;</h2>
     </header>
 
-    <DataSummary></DataSummary>
+    <DataSummary :profile="profile"></DataSummary>
 
     <Demographics
       label="Demographics"
@@ -27,6 +27,7 @@ import Demographics from './Demographics';
 import Postcodes from './Postcodes';
 
 export default {
+  props: ['profile'],
   components: {
     DataSummary,
     Demographics,
