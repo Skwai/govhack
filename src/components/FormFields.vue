@@ -8,7 +8,9 @@
         type="number"
         class="FormFields__FieldInput"
         required
-        maxlength="10"
+        min="0"
+        max="100000000"
+        maxlength="9"
         v-model="profile.income"
       >
     </label>
@@ -27,10 +29,11 @@
     <label class="FormFields__Field">
       <span class="FormFields__FieldLabel">Postcode</span>
       <input
-        type="text"
+        type="number"
         class="FormFields__FieldInput"
         required
-        minlength="4"
+        min="1000"
+        max="9999"
         maxlength="4"
         v-model="profile.postcode"
       >
@@ -59,10 +62,11 @@ export default {
   data() {
     return {
       profile: {
-        income: null,
-        postcode: null,
+        // defaults to make testing easier
+        income: '60,000',
+        postcode: 7000,
+        age: 24,
         gender: 'Male',
-        industry: null,
       },
     };
   },

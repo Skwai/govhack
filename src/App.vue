@@ -34,15 +34,15 @@ export default {
       profile: null,
     };
   },
+  computed: {
+    showData() {
+      return !this.loading && !this.error && this.profile;
+    },
+  },
   methods: {
     updateProfile(profile) {
       console.log(profile);
       this.profile = profile;
-    },
-  },
-  computed: {
-    showData() {
-      return !this.loading && !this.error && this.profile;
     },
   },
   components: {
