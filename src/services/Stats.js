@@ -96,7 +96,7 @@ class StatsService {
     const data = this.ageData.filter((el) => {
       const t1 = gender ? el.Gender.toLowerCase() === gender.toLowerCase() : true;
       const t2 = state ? el.State.toLowerCase() === state.toLowerCase() : true;
-      const t3 = age ? el.Age.toLowerCase() === age.toLowerCase() : true;
+      const t3 = age ? el.Age.toLowerCase().includes(age.toLowerCase()) : true;
       return t1 && t2 && t3;
     });
 

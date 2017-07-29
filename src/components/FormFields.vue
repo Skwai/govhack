@@ -14,9 +14,9 @@
         v-model="profile.income"
       >
     </label>
-    <div class="FormFields__Field" ref="ageField">
+    <div class="FormFields__Field" ref="ageField" @click="toggleAgeOptions">
       <span class="FormFields__FieldLabel">Your Age</span>
-      <button @click="toggleAgeOptions" class="FormFields__OptionsToggle">{{profile.age}}</button>
+      <button class="FormFields__OptionsToggle">{{profile.age}}</button>
       <div class="FormFields__Options" :class="{'-open': showAgeOptions}">
         <div
           class="FormFields__Option"
@@ -69,7 +69,7 @@ export default {
         // defaults to make testing easier
         income: '60000',
         postcode: '7000',
-        age: 'd. 30 - 34',
+        age: '30 - 34',
         gender: 'Male',
       },
       ages: config.AGES,
