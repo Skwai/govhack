@@ -24,12 +24,14 @@ export default {
       return 100 - ((this.max / BAR_MAX) * 100);
     },
     positionedLabels() {
-      return this.labels.map((label) => {
-        const { value } = this;
+      const labels = this.labels.map((label) => {
+        const { value } = label;
         /* eslint-disable no-param-reassign */
-        label.placement = value >= BAR_MAX ? 1 : value / BAR_MAX;
+        label.position = value >= BAR_MAX ? 1 : value / BAR_MAX;
         return label;
       });
+      console.log(labels);
+      return labels;
     },
   },
   components: {
@@ -44,7 +46,7 @@ export default {
   height: 2rem;
   border-radius: 3px;
   position: relative;
-  margin: 4rem 0;
+  margin: 5rem 0;
 
   &__MinMax {
     background: #499aff;
