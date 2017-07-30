@@ -33,7 +33,7 @@
         type="number"
         class="FormFields__FieldInput"
         required
-        min="1000"
+        min="100"
         max="9999"
         maxlength="4"
         v-model="profile.postcode"

@@ -14,6 +14,7 @@ export default {
 
   methods: {
     async loadPostcodeData() {
+      // Based on https://gist.github.com/randomecho/5020859
       const response = await fetch('/static/postcodes.json');
       return response.json();
     },
