@@ -27,6 +27,7 @@ export default {
       zoom: 5,
       center: { lat: -26.610658, lng: 134.542068 },
       mapTypeId: 'roadmap',
+      streetViewControl: false,
       styles,
     });
     const markers = [];
