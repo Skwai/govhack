@@ -31,7 +31,7 @@ export default {
       styles,
     });
     const markers = [];
-
+    const points = [];
 
     const icon = new window.google.maps.MarkerImage(
       '/static/marker.png',
@@ -44,6 +44,10 @@ export default {
     StatsService.getPostcodeAverages().forEach((s) => {
       if (this.postcodes[s.postcode]) {
         const { name, longitude, latitude } = this.postcodes[s.postcode];
+        points.push({
+          location: new window.google.maps.LatLng(longitude, latitude),
+          weight: s.median / 50000,
+        });
         const marker = new window.google.maps.Marker({
           position: { lat: longitude, lng: latitude },
           title: name,
@@ -60,6 +64,11 @@ export default {
     });
 
     this.clusters = new window.MarkerClusterer(map, markers, { imagePath: '/static/m' });
+    this.heatmap = new window.google.maps.visualization.HeatmapLayer({
+      data: points,
+      map,
+      radius: 50,
+    });
   },
 };
 </script>
