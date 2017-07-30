@@ -25,7 +25,7 @@ export default {
 
     this.postcodes = await this.loadPostcodeData();
     const map = new window.google.maps.Map(this.$el, {
-      zoom: 5,
+      zoom: 4,
       center: { lat: -26.610658, lng: 134.542068 },
       mapTypeId: 'roadmap',
       streetViewControl: false,
