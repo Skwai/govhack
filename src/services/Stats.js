@@ -62,6 +62,7 @@ class StatsService {
     return this.postcodeData.map(el => ({
       postcode: el.Postcode,
       average: StatsService.toInt(el.Average),
+      median: StatsService.toInt(el.Median),
     }));
   }
 

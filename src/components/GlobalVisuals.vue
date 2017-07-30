@@ -1,25 +1,12 @@
 <template>
   <article class="GlobalVisuals">
-    <GoogleMap />
-    <!--The average wage is ${{average.toFixed(0)}}<br>-->
-
-    <!--The top 10 richest suburbs-->
-    <!--<ol>-->
-      <!--<li v-for="top in topTen">{{top.median}} Postcode: {{top.postcode}}, {{top.state}}</li>-->
-    <!--</ol>-->
-
-    <!--The top 10 poorest suburbs-->
-    <!--<ol>-->
-      <!--<li v-for="bot in bottomTen">{{bot.median}} Postcode: {{bot.postcode}}, {{bot.state}}</li>-->
-    <!--</ol>-->
-
-
+    <GoogleHeatMap />
   </article>
 </template>
 
 <script>
 import StatsService from '../services/Stats';
-import GoogleMap from './GoogleMap';
+import GoogleHeatMap from './GoogleHeatMap';
 
 export default {
   props: [],
@@ -34,13 +21,15 @@ export default {
     };
   },
   components: {
-    GoogleMap,
+    GoogleHeatMap,
   },
 };
 </script>
 
 <style scoped lang="stylus">
 .GlobalVisuals {
-
+    width: 100%;
+    height: 100vh;
+    margin: -2rem -2rem -2rem -2rem;
 }
 </style>
