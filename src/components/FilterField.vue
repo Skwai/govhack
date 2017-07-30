@@ -124,7 +124,7 @@ export default {
     top: 0;
     left: 0;
     box-shadow: rgba(0,0,0,.2) 0 1px 2px, rgba(0,0,0,.125) 0 2px 1rem;
-    z-index: 2;
+    z-index: 1000;
     font-size: 0.875rem;
     overflow-y: auto;
 
