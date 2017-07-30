@@ -63,13 +63,10 @@ class StatsService {
     };
   }
 
-  getStateStats() {
-    const states = this.postcodeData
-      .map(el => el.State)
-      .filter((v, i, s) => s.indexOf(v) === i);
-    return states.map(state => ({
-      state,
-      average: this.getAverageforState(state),
+  getPostcodeAverages() {
+    return this.postcodeData.map(el => ({
+      postcode: el.Postcode,
+      average: StatsService.toInt(el.Average),
     }));
   }
 

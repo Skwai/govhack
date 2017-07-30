@@ -7,6 +7,23 @@ import config from '../config';
 import StatsService from '../services/Stats';
 
 export default {
+  data() {
+    return {
+      postcodes: {},
+    };
+  },
+
+  methods: {
+    async loadPostcodeData() {
+      const response = await fetch('/static/postcodes.json');
+      return response.json();
+    },
+  },
+
+  async created() {
+    this.postcodes = await this.loadPostcodeData();
+  },
+
   mounted() {
     window.google.charts.load('current', {
       packages: ['geochart'],
@@ -14,18 +31,29 @@ export default {
     });
     window.google.charts.setOnLoadCallback(() => {
       const table = [
-        ['State', 'Average Salary'],
+        ['Longitude', 'Latitude', 'Name', 'Average Salary'],
       ];
-      StatsService.getStateStats()
-        .forEach(s => table.push([`AU-${s.state}`, Number(s.average.toFixed())]));
-      console.log(table);
+      StatsService.getPostcodeAverages()
+        .forEach((s) => {
+          if (this.postcodes[s.postcode]) {
+            const { name, longitude, latitude } = this.postcodes[s.postcode];
+            if (longitude !== 0 && latitude !== 0) {
+              table.push([longitude, latitude, name, s.average]);
+            }
+          }
+        });
+
       const data = window.google.visualization.arrayToDataTable(table);
       const options = {
-        region: 'AU',
-        resolution: 'provinces',
+        region: '053',
+//        resolution: 'provinces',
+        displayMode: 'markers',
         colors: ['#499aff'],
         backgroundColor: {
           fill: '#f1f2f3',
+        },
+        magnifyingGlass: {
+          enable: false,
         },
       };
       const chart = new window.google.visualization.GeoChart(this.$el);
