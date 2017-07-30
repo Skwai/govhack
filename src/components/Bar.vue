@@ -79,7 +79,7 @@ export default {
     font-size: 0.75rem;
     text-transform: uppercase;
     top: 50%;
-    transform: translateY(-50%)
+    transform: translateY(-50%);
   }
 
   &::before {
