@@ -2,7 +2,10 @@
   <main class="App">
     <div class="App__Form">
       <AppHeader></AppHeader>
-      <FormFields :submitted="updateProfile"></FormFields>
+      <FormFields
+        :submitted="updateProfile"
+        :disabled="loading"
+      ></FormFields>
     </div>
     <div class="App__Content">
       <Loading v-if="loading"></Loading>

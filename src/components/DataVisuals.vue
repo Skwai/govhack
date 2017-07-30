@@ -1,9 +1,5 @@
 <template>
   <article class="DataVisuals">
-    <header>
-      <h2 class="DataVisuals__Heading">How you compare&hellip;</h2>
-    </header>
-
     <DataSummary :profile="profile"></DataSummary>
 
     <Demographics
@@ -41,10 +37,5 @@ export default {
 <style scoped lang="stylus">
 .DataVisuals {
   width: 100%;
-  padding: 4vmin;
-
-  &__Heading {
-    margin: 0 0 1rem;
-  }
 }
 </style>

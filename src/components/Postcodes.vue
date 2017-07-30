@@ -2,7 +2,7 @@
   <Block>
     <div class="Chart">
       <header class="Chart__Intro">
-        <BlockHeading>Your Postcode</BlockHeading>
+        <BlockHeading>Your Postcode <small>({{profile.postcode}})</small></BlockHeading>
         <div class="Chart__Filters">
           <FilterField
             :value.sync="compare.state"

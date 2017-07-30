@@ -52,6 +52,7 @@
     <button
       class="FormFields__Btn"
       type="submit"
+      :disabled="disabled"
     >Find out</button>
     <p><small>We don't store any of your details.</small></p>
     <p><small>Data sourced from ATO income data.</small></p>
@@ -62,7 +63,7 @@
 import config from '../config';
 
 export default {
-  props: ['submitted'],
+  props: ['submitted', 'disabled'],
   data() {
     return {
       showAgeOptions: false,
@@ -170,6 +171,11 @@ export default {
     letter-spacing: 0.1em;
     width: 100%;
     margin: 1rem 0;
+
+    &[disabled] {
+      opacity: .5;
+      cursor: not-allowed;
+    }
 
     &:hover,
     &:active,
