@@ -69,11 +69,10 @@ export default {
       isSubmitted: false,
       showAgeOptions: false,
       profile: {
-        // defaults to make testing easier
-        income: '60000',
-        postcode: '7000',
-        age: '30 - 34',
-        gender: 'Male',
+        income: '',
+        postcode: '',
+        age: '',
+        gender: '',
       },
       ages: config.AGES,
     };
