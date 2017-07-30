@@ -71,7 +71,7 @@ export default {
       profile: {
         income: '',
         postcode: '',
-        age: '18 - 24',
+        age: '',
         gender: '',
       },
       ages: config.AGES,
@@ -275,6 +275,7 @@ export default {
     width: 100%;
     text-align: left;
     position: relative;
+    min-height: 1.84375rem;
 
     &::after {
       content: "";
