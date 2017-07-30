@@ -4,9 +4,15 @@
       <div class="FilterField__LabelIcon">
         <slot name="icon"></slot>
       </div>
-      <div class="FilterField__LabelText">{{value}}</div>
+      <div class="FilterField__LabelText">{{value || nullLabel}}</div>
     </button>
     <div class="FilterField__Options">
+      <div
+        class="FilterField__Option"
+        v-if="nullLabel"
+        @click="select(null)"
+        :class="{'-selected': value === null}"
+      >{{nullLabel}}</div>
       <div
         class="FilterField__Option"
         v-for="(option, index) in options"
@@ -20,7 +26,7 @@
 
 <script>
 export default {
-  props: ['value', 'options'],
+  props: ['value', 'options', 'nullLabel'],
   data() {
     return {
       open: false,

@@ -40,9 +40,20 @@ export default {
   bottom: 100%;
   transform: translate(-50%, -0.5rem);
   transition: 0.5s ease-in-out;
+  white-space: nowrap;
 
   &:hover {
     z-index: 2;
+  }
+
+  &.-top {
+    background: #499aff;
+    color: #fff;
+    box-shadow: rgba(0,0,0,.1) 0 2px 5px;
+
+    &::after {
+      border-top-color: #499aff;
+    }
   }
 
   &.-bottom {

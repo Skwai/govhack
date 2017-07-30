@@ -46,6 +46,7 @@ export default {
       const data = window.google.visualization.arrayToDataTable(table);
       const options = {
         region: '053',
+        explorer: {},
 //        resolution: 'provinces',
         displayMode: 'markers',
         colors: ['#499aff'],

@@ -1,18 +1,29 @@
 <template>
   <div class="Bar">
-    <div class="Bar__MinMax" :style="{ left: `${offsetMin}%`, right: `${offsetMax}%` }"></div>
+    <div
+      class="Bar__MinMax"
+      :style="{ left: `${offsetMin}%`, right: `${offsetMax}%` }"
+      @mouseenter="showBarLabel"
+      @mouseout="hideBarLabel"
+    >
+      <div class="Bar__Label" :class="{ '-shown': barLabelShown }">
+        <div class="Bar__LabelMin"><strong>Min:</strong> ${{min.toLocaleString()}}</div>
+        <div class="Bar__LabelMin"><strong>Max:</strong> ${{max.toLocaleString()}}</div>
+      </div>
+    </div>
     <BarLabel
       v-for="(label, index) in positionedLabels"
       :key="index"
       :label="label"
     ></BarLabel>
+
   </div>
 </template>
 
 <script>
 import BarLabel from './BarLabel';
 
-const BAR_MAX = 130000;
+const BAR_MAX = 200000;
 
 export default {
   props: ['min', 'max', 'labels'],
@@ -32,6 +43,19 @@ export default {
         return label;
       });
       return labels;
+    },
+  },
+  data() {
+    return {
+      barLabelShown: false,
+    };
+  },
+  methods: {
+    showBarLabel() {
+      this.barLabelShown = true;
+    },
+    hideBarLabel() {
+      this.barLabelShown = false;
     },
   },
   components: {
@@ -60,12 +84,14 @@ export default {
 
   &::before {
     left: 0.5rem;
-    content: "$0"
+    content: "$0";
+    z-index: 2;
   }
 
   &::after {
     right: 0.5rem;
-    content: "$130k";
+    content: "$200k+";
+    z-index: 2;
   }
 
   &__MinMax {
@@ -74,6 +100,49 @@ export default {
     border-radius: 3px;
     position: absolute;
     transition: 0.5s ease-in-out;
+  }
+
+  &__Label {
+    transform: translate(-50%, 0rem) scale(0,0) ;
+    background: #fff;
+    border-radius: 3px;
+    background: #fff;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    border-radius: 3px;
+    box-shadow: rgba(0,0,0,.15) 0 0 0 1px, rgba(0,0,0,.1) 0 2px 5px;
+    position: absolute;
+    text-align: left;
+    bottom: 100%;
+    transition: 0.25s ease-in-out;
+    left: 50%;
+    z-index: 5;
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      left: 50%;
+      top: 100%;
+      width: 0;
+      height: 0;
+      border-top: rgba(0,0,0,.15) solid 6px;
+      border-left: transparent solid 6px;
+      border-right: transparent solid 6px;
+    }
+
+    &::before {
+      transform: translate(-50%, 1px);
+    }
+
+    &::after {
+      transform: translateX(-50%);
+      border-top: #fff solid 6px;
+    }
+
+    &.-shown {
+      transform: translate(-50%, -0.5rem) scale(1,1);
+    }
   }
 }
 </style>
