@@ -73,7 +73,7 @@ export default {
     height: 100%;
     border-radius: 3px;
     position: absolute;
-    transition: 0.2s;
+    transition: 0.5s ease-in-out;
   }
 }
 </style>

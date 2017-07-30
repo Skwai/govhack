@@ -53,7 +53,8 @@
       class="FormFields__Btn"
       type="submit"
     >Find out</button>
-    <p><small>* We don't store any of your details</small></p>
+    <p><small>We don't store any of your details.</small></p>
+    <p><small>Data sourced from ATO income data.</small></p>
   </form>
 </template>
 

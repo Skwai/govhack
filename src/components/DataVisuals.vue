@@ -16,6 +16,7 @@
     <Postcodes
       label="Demographics"
       description="Lorem ipsum dolor sit amet"
+      :profile="profile"
     >
     </Postcodes>
 

@@ -22,7 +22,7 @@ export default {
     },
     formattedValue() {
       // TODO: abbreviate this number
-      return `$${Number(this.label.value.toFixed()).toLocaleString()}`;
+      return `$${Number(Number(this.label.value).toFixed()).toLocaleString()}`;
     },
   },
 };
@@ -39,7 +39,7 @@ export default {
   text-align: center;
   bottom: 100%;
   transform: translate(-50%, -0.5rem);
-  transition: 0.2s;
+  transition: 0.5s ease-in-out;
 
   &:hover {
     z-index: 2;

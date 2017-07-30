@@ -42,30 +42,38 @@ class StatsService {
 
   getPostcodeStats({ postcode, state }) {
     const data = this.postcodeData.find(el => el.Postcode === postcode);
-    const median = StatsService.toInt(data.Median);
 
+    if (!data) {
+      return {
+        average: null,
+        max: null,
+        min: null,
+      };
+    }
+
+    const average = StatsService.toInt(data.Average);
     const raw = (state ? (this.postcodeData.filter(el => el.State === state)) : this.postcodeData)
-      .map(el => StatsService.toInt(el.Median));
-
+      .map(el => StatsService.toInt(el.Average));
     const min = Math.min(...raw);
     const max = Math.max(...raw);
-
     return {
-      median,
+      average,
       min,
       max,
     };
   }
 
   getStateStats() {
-    const states = this.postcodeData.map(el => el.State).filter((v, i, s) => s.indexOf(v) === i);
-    return states.map(s => ({
-      state: s,
-      avg: this.getStatesforState(s),
+    const states = this.postcodeData
+      .map(el => el.State)
+      .filter((v, i, s) => s.indexOf(v) === i);
+    return states.map(state => ({
+      state,
+      average: this.getAverageforState(state),
     }));
   }
 
-  getStatesforState(state) {
+  getAverageforState(state) {
     const filtered = this.postcodeData.filter(el => el.State === state);
     const total = filtered.reduce((sum, value) => sum + StatsService.toInt(value.Average), 0);
     const count = filtered.length;

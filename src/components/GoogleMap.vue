@@ -17,7 +17,7 @@ export default {
         ['State', 'Average Salary'],
       ];
       StatsService.getStateStats()
-        .forEach(s => table.push([`AU-${s.state}`, Number(s.avg.toFixed())]));
+        .forEach(s => table.push([`AU-${s.state}`, Number(s.average.toFixed())]));
       console.log(table);
       const data = window.google.visualization.arrayToDataTable(table);
       const options = {

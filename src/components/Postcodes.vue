@@ -6,8 +6,8 @@
       </div>
       <div class="Chart__Filters">
         <FilterField
-          :value="compare.state"
-          :options="['All', 'TAS']"
+          :value.sync="compare.state"
+          :options="stateOptions"
         >
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="#343434" stroke-miterlimit="10" transform="translate(.5 .5)"><path d="M17 6.5L23 5v15l-8 2-6-2-8 2V7l6-1.5" data-cap="butt"/><path d="M17 6c0 3.1-5 8.1-5 8.1S7 9.1 7 6c0-3.2 2.6-5 5-5s5 1.8 5 5z" data-color="color-2" stroke-linecap="square"/><circle cx="12" cy="6" r="1" stroke-linecap="square"/></g></svg>
         </FilterField>
@@ -15,8 +15,8 @@
     </div>
 
     <Bar
-      :min="17000"
-      :max="98000"
+      :min="min"
+      :max="max"
       :labels="labels"
     ></Bar>
   </div>
@@ -25,32 +25,61 @@
 <script>
 import Bar from './Bar';
 import FilterField from './FilterField';
+import config from '../config';
+import StatsService from '../services/Stats';
 
 export default {
-  props: ['label', 'description'],
+  props: ['profile'],
   data() {
     return {
+      min: 0,
+      max: 0,
+      stateOptions: config.STATES,
       compare: {
         state: 'TAS',
       },
-      labels: [
-        {
-          name: 'You',
-          value: 32400,
-          placement: 'top',
-        },
-        {
-          name: '7000',
-          value: 60123,
-          placement: 'bottom',
-        },
-        {
-          name: 'TAS',
-          value: 42500,
-          placement: 'bottom',
-        },
-      ],
     };
+  },
+  computed: {
+    profileLabel() {
+      return {
+        name: 'You',
+        value: this.profile.income,
+        placement: 'top',
+      };
+    },
+    postcodeAverageLabel() {
+      const { postcode } = this.profile;
+      const { state } = this.compare;
+      const { average, min, max } = StatsService.getPostcodeStats({
+        postcode,
+        state,
+      });
+
+      this.min = min;
+      this.max = max;
+
+      return {
+        name: this.profile.postcode,
+        value: average,
+        placement: 'bottom',
+      };
+    },
+    stateAverageLabel() {
+      const average = StatsService.getAverageforState(this.compare.state);
+      return {
+        name: 'TAS',
+        value: average,
+        placement: 'bottom',
+      };
+    },
+    labels() {
+      return [
+        this.stateAverageLabel,
+        this.profileLabel,
+        this.postcodeAverageLabel,
+      ];
+    },
   },
   components: {
     Bar,
