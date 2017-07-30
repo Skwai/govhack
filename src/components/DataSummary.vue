@@ -1,29 +1,32 @@
 <template>
-  <div class="DataSummary">
-    <div class="DataSummary__Item">
-      <DataSummaryItem
-        label="Gender"
-        :value="genderAverage"
-      >Compared to the average <strong>{{profile.gender}}</strong>
-      </DataSummaryItem>
+  <Block>
+    <div class="DataSummary">
+      <div class="DataSummary__Item">
+        <DataSummaryItem
+          label="Gender"
+          :value="genderAverage"
+        >Compared to the average <strong>{{profile.gender}}</strong>
+        </DataSummaryItem>
+      </div>
+      <div class="DataSummary__Item">
+        <DataSummaryItem
+          label="State"
+          :value="stateAverage"
+        >Compared to others living in <strong>{{state}}</strong></DataSummaryItem>
+      </div>
+      <div class="DataSummary__Item">
+        <DataSummaryItem
+          label="Age"
+          :value="ageAverage"
+        >Compared to other <strong>{{profile.age}} year olds</strong></DataSummaryItem>
+      </div>
     </div>
-    <div class="DataSummary__Item">
-      <DataSummaryItem
-        label="State"
-        :value="stateAverage"
-      >Compared to others living in <strong>{{state}}</strong></DataSummaryItem>
-    </div>
-    <div class="DataSummary__Item">
-      <DataSummaryItem
-        label="Age"
-        :value="ageAverage"
-      >Compared to other <strong>{{profile.age}} year olds</strong></DataSummaryItem>
-    </div>
-  </div>
+  </Block>
 </template>
 
 <script>
 import DataSummaryItem from './DataSummaryItem';
+import Block from './Block';
 import StatsService from '../services/Stats';
 
 export default {
@@ -35,6 +38,7 @@ export default {
   },
   components: {
     DataSummaryItem,
+    Block,
   },
   watch: {
     'profile.postcode': function (postcode) {
@@ -63,12 +67,14 @@ export default {
 <style scoped lang="stylus">
 .DataSummary {
   display: flex;
-  padding: 0 0;
-  background: #fff;
-  box-shadow: rgba(0,0,0,0.05) 0 0 0 1px, rgba(0,0,0,0.05) 0 2px 10px;
+  text-align: center;
 
   @media (max-width: 1023px) {
     flex-direction: column;
+  }
+
+  @media (min-width: 1024px) {
+    justify-content: center;
   }
 
   &__Item {

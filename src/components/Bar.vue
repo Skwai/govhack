@@ -21,7 +21,8 @@ export default {
       return (this.min / BAR_MAX) * 100;
     },
     offsetMax() {
-      return 100 - ((this.max / BAR_MAX) * 100);
+      const offset = 100 - ((this.max / BAR_MAX) * 100);
+      return offset < 0 ? 0 : offset;
     },
     positionedLabels() {
       const labels = this.labels.map((label) => {
@@ -30,7 +31,6 @@ export default {
         label.position = value >= BAR_MAX ? 1 : value / BAR_MAX;
         return label;
       });
-      console.log(labels);
       return labels;
     },
   },

@@ -33,11 +33,6 @@ class StatsService {
     this.avgMedSalary = totalMedSalary / this.postcodeData.length;
     this.medAvgSalary = StatsService.getMedian(medSals);
     this.medMedSalary = StatsService.getMedian(avgSals);
-
-    console.log(`avgMedSalary: ${this.avgMedSalary}`);
-    console.log(`avgAvgSalary: ${this.avgAvgSalary}`);
-    console.log(`medAvgSalary: ${this.medAvgSalary}`);
-    console.log(`medMedSalary: ${this.medMedSalary}`);
   }
 
   getPostcodeStats({ postcode, state }) {
