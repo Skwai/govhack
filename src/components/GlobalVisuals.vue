@@ -5,21 +5,10 @@
 </template>
 
 <script>
-import StatsService from '../services/Stats';
 import GoogleHeatMap from './GoogleHeatMap';
 
 export default {
   props: [],
-  data() {
-    const { average, min, max } = StatsService.getDemographicsStats({});
-    return {
-      average,
-      min,
-      max,
-      topTen: StatsService.getTopPostcodes(10),
-      bottomTen: StatsService.getBottomPostcodes(10),
-    };
-  },
   components: {
     GoogleHeatMap,
   },

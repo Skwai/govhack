@@ -73,21 +73,6 @@ class StatsService {
     return total / count;
   }
 
-  getTopPostcodes(num) {
-    const sorted = this.postcodeData.sort(
-      (a, b) => StatsService.toInt(a.Median) - (StatsService.toInt(b.Median)),
-    );
-    return sorted.reverse().splice(0, num).map(
-      el => ({ postcode: el.Postcode, state: el.State, median: el.Median }));
-  }
-
-  getBottomPostcodes(num) {
-    const sorted = this.postcodeData.sort((a, b) =>
-      StatsService.toInt(a.Median) - (StatsService.toInt(b.Median)));
-    return sorted.splice(0, num).map(el =>
-      ({ postcode: el.Postcode, state: el.State, median: el.Median }));
-  }
-
   getState(postcode) {
     const maybeState = this.postcodeData.find(el => el.Postcode === postcode);
     return maybeState ? maybeState.State : null;
