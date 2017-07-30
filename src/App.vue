@@ -29,7 +29,6 @@ import GlobalVisuals from './components/GlobalVisuals';
 import SheetsService from './services/Sheets';
 import StatsService from './services/Stats';
 
-
 const ERROR_MESSAGE = 'Couldn\'t load data :(';
 
 export default {
@@ -162,6 +161,7 @@ small {
     flex: 1;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
 
   &__Form {

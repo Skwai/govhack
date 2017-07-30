@@ -78,6 +78,8 @@ export default {
 .GoogleHeatMap {
   width: 100%;
   height: 100vh;
-  margin: -2rem -2rem -2rem -2rem;
+  position: absolute !important;
+  left: 0;
+  top: 0;
 }
 </style>

@@ -71,7 +71,7 @@ export default {
       profile: {
         income: '',
         postcode: '',
-        age: '',
+        age: '18 - 24',
         gender: '',
       },
       ages: config.AGES,
