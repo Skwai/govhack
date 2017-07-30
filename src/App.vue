@@ -10,7 +10,9 @@
     <div class="App__Content">
       <Loading v-if="loading"></Loading>
       <Error v-if="error" :error="error"></Error>
-      <DataVisuals :profile="profile" v-if="hasProfile"></DataVisuals>
+      <transition name="fade">
+        <DataVisuals :profile="profile" v-if="hasProfile"></DataVisuals>
+      </transition>
       <GlobalVisuals v-if="showOverview"></GlobalVisuals>
     </div>
   </main>
@@ -130,6 +132,14 @@ textarea {
 
 small {
   opacity: .5
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1s
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
 }
 
 .App {

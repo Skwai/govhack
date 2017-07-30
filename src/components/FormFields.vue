@@ -53,7 +53,7 @@
       class="FormFields__Btn"
       type="submit"
       :disabled="disabled"
-    >Find out</button>
+    >{{isSubmitted ? 'Update' : 'Find out'}}</button>
     <p><small>We don't store any of your details.</small></p>
     <p><small>Data sourced from ATO income data.</small></p>
   </form>
@@ -66,6 +66,7 @@ export default {
   props: ['submitted', 'disabled'],
   data() {
     return {
+      isSubmitted: false,
       showAgeOptions: false,
       profile: {
         // defaults to make testing easier
@@ -90,6 +91,7 @@ export default {
       this.showAgeOptions = !this.showAgeOptions;
     },
     submit() {
+      this.isSubmitted = true;
       this.submitted(this.profile);
     },
     documentClick(ev) {
