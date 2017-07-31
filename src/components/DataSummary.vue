@@ -48,17 +48,17 @@ export default {
   computed: {
     genderAverage() {
       const { average } = StatsService.getDemographicsStats({ gender: this.profile.gender });
-      return (((this.profile.income / average) * 100) - 100).toFixed(1);
+      return (this.profile.income / average).toFixed(2);
     },
     ageAverage() {
       const { average } = StatsService.getDemographicsStats({ age: this.profile.age });
-      return (((this.profile.income / average) * 100) - 100).toFixed(1);
+      return (this.profile.income / average).toFixed(2);
     },
     stateAverage() {
       const { average } = StatsService.getDemographicsStats({
         state: this.state,
       });
-      return (((this.profile.income / average) * 100) - 100).toFixed(1);
+      return (this.profile.income / average).toFixed(2);
     },
   },
 };
