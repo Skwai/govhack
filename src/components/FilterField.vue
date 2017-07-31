@@ -75,6 +75,7 @@ export default {
     font-size: 0.875rem;
     opacity: .5;
     white-space: nowrap;
+    box-shadow: rgba(0,0,0,.2) 0 0 0 1px;
 
     &:hover,
     &:active,

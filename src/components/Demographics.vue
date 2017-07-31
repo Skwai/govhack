@@ -98,16 +98,27 @@ export default {
 <style scoped lang="stylus">
 .Chart {
   &__Intro {
+    text-align: center;
+
     @media (min-width: 1024px) {
       display: flex;
       align-items: center;
+      text-align: left;
     }
   }
 
   &__Filters {
     display: flex;
     align-items: center;
-    margin: 0.5rem 0 0.5rem auto;
+
+    @media (max-width: 1023px) {
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 1024px) {
+      margin: 0.5rem 0 0.5rem auto;
+    }
 
     > * + * {
       margin-left: 0.5rem;
