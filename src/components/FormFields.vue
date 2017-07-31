@@ -153,7 +153,10 @@ export default {
       padding-left: 0.35rem;
     }
 
-    &:focus {
+    &:active,
+    &:focus,
+    &:required,
+    &:invalid {
       outline: 0;
       box-shadow: none;
     }
