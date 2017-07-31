@@ -1,6 +1,6 @@
 <template>
   <form class="FormFields" @submit.prevent="submit">
-    <p class="FormFields__Lead">Find out how your income compares to others.</p>
+    <p class="FormFields__Lead">Find out how your income compares to other Australians</p>
     <label class="FormFields__Field">
       <span class="FormFields__FieldLabel">Your Yearly Income</span>
       <span class="FormFields__FieldMask">$</span>
