@@ -122,9 +122,9 @@ export default {
     opacity: 0;
     max-height: 30vh;
     border-radius: 2px;
-    top: 0;
+    top: 100%;
     left: 0;
-    box-shadow: rgba(0,0,0,.2) 0 1px 2px, rgba(0,0,0,.125) 0 2px 1rem;
+    box-shadow: rgba(0,0,0,.2) 0 1px 2px, rgba(0,0,0,.125) 0 2px 1rem, rgba(0,0,0,.15) 0 5px 10px;
     z-index: 1000;
     font-size: 0.875rem;
     overflow-y: auto;
@@ -137,7 +137,7 @@ export default {
 
   &__Option {
     cursor: pointer;
-    padding: 0.5rem 0.75rem;
+    padding: 0.75rem 0.75rem;
     transition: 0.2s;
     white-space: nowrap;
 

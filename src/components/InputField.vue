@@ -60,6 +60,10 @@ export default {
     font-size: 1rem;
     font-weight: bold;
 
+    &:invalid {
+      box-shadow: none;
+    }
+
     &:focus,
     &:hover {
       outline: 0;

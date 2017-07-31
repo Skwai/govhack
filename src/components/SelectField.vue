@@ -153,7 +153,7 @@ export default {
     opacity: 0;
     max-height: 30vh;
     border-radius: 2px;
-    box-shadow: rgba(0,0,0,.2) 0 1px 2px, rgba(0,0,0,.125) 0 2px 1rem;
+    box-shadow: rgba(0,0,0,.2) 0 1px 2px, rgba(0,0,0,.125) 0 2px 1rem, rgba(0,0,0,.15) 0 5px 10px;
     z-index: 2;
     max-width: 100%;
     font-size: 0.875rem;
