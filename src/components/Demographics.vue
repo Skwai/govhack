@@ -29,7 +29,7 @@
       </header>
 
       <Bar
-        tooltipTitle="Segments"
+        tooltipTitle="Selected filters"
         :min="min"
         :max="max"
         :labels="labels"
