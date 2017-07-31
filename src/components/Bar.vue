@@ -7,8 +7,8 @@
       @mouseout="hideBarLabel"
     >
       <div class="Bar__Label" :class="{ '-shown': barLabelShown }">
-        <div class="Bar__LabelMin"><strong>Min:</strong> ${{min.toLocaleString()}}</div>
-        <div class="Bar__LabelMin"><strong>Max:</strong> ${{max.toLocaleString()}}</div>
+        <div class="Bar__LabelMin"><strong>Lowest:</strong> ${{min.toLocaleString()}}</div>
+        <div class="Bar__LabelMin"><strong>Highest:</strong> ${{max.toLocaleString()}}</div>
       </div>
     </div>
     <BarLabel
