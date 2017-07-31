@@ -1,7 +1,7 @@
 <template>
   <div class="DataSummaryItem">
     <h3 class="DataSummaryItem__Heading">{{label}}</h3>
-    <div class="DataSummaryItem__Content" :class="{ '-up': value >= 0, '-down': value < 0 }">
+    <div class="DataSummaryItem__Content" :class="{ '-up': value >= 1, '-down': value < 1 }">
       <svg class="DataSummaryItem__Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" d="M2.5 7.5l10 10 10-10" stroke-linecap="square"/></svg>
       <span class="DataSummaryItem__Value">{{Math.abs(value)}}<small>X</small></span>
     </div>
