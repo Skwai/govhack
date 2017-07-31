@@ -47,12 +47,12 @@ export default {
   }
 
   &.-top {
-    background: #499aff;
+    background: #081b34;
     color: #fff;
     box-shadow: rgba(0,0,0,.1) 0 2px 5px;
 
     &::after {
-      border-top-color: #499aff;
+      border-top-color: #081b34;
     }
   }
 

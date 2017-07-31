@@ -37,5 +37,7 @@ export default {
 <style scoped lang="stylus">
 .DataVisuals {
   width: 100%;
+  max-width: 60rem;
+  align-self: flex-start;
 }
 </style>
