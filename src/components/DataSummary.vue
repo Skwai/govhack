@@ -12,7 +12,7 @@
         <DataSummaryItem
           label="State"
           :value="stateAverage"
-        >Compared to others living in <strong>{{state}}</strong></DataSummaryItem>
+        >Compared to others living in <strong>{{state ? state : 'Australia'}}</strong></DataSummaryItem>
       </div>
       <div class="DataSummary__Item">
         <DataSummaryItem
