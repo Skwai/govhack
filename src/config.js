@@ -22,6 +22,7 @@ export default {
     'NT',
     'SA',
     'TAS',
+    'QLD',
     'VIC',
     'WA',
   ],
