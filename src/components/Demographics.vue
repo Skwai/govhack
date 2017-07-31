@@ -29,6 +29,7 @@
       </header>
 
       <Bar
+        tooltipTitle="Segments"
         :min="min"
         :max="max"
         :labels="labels"

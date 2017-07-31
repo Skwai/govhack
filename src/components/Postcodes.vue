@@ -15,6 +15,7 @@
       </header>
 
       <Bar
+        :tooltipTitle="`Suburbs in ${compare.state ? compare.state : 'Australia'}`"
         :min="min"
         :max="max"
         :labels="labels"
@@ -63,25 +64,13 @@ export default {
       this.max = max;
 
       return {
-        name: this.profile.postcode,
-        value: average,
-        placement: 'bottom',
-      };
-    },
-    stateAverageLabel() {
-      const { state } = this.compare;
-      const average = state
-        ? StatsService.getAverageforState(this.compare.state)
-        : StatsService.avgAvgSalary;
-      return {
-        name: this.compare.state || 'Aus',
+        name: `${this.profile.postcode} Avg`,
         value: average,
         placement: 'bottom',
       };
     },
     labels() {
       return [
-        this.stateAverageLabel,
         this.profileLabel,
         this.postcodeAverageLabel,
       ];

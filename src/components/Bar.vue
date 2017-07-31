@@ -7,6 +7,7 @@
       @mouseout="hideBarLabel"
     >
       <div class="Bar__Label" :class="{ '-shown': barLabelShown }">
+        <h5 class="Bar__Title" v-if="tooltipTitle">{{tooltipTitle}}</h5>
         <div class="Bar__LabelMin"><strong>Lowest:</strong> ${{min.toLocaleString()}}</div>
         <div class="Bar__LabelMin"><strong>Highest:</strong> ${{max.toLocaleString()}}</div>
       </div>
@@ -26,7 +27,7 @@ import BarLabel from './BarLabel';
 const BAR_MAX = 200000;
 
 export default {
-  props: ['min', 'max', 'labels'],
+  props: ['min', 'max', 'labels', 'tooltipTitle'],
   computed: {
     offsetMin() {
       return (this.min / BAR_MAX) * 100;
@@ -71,6 +72,14 @@ export default {
   margin: 3rem 0;
   border-radius: 3px;
   position: relative;
+  box-shadow: rgba(0,0,0,.1) 0 2px 0;
+
+  &__Title {
+    margin: 0 0 0.25rem;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
 
   &::before,
   &::after {
@@ -100,6 +109,7 @@ export default {
     border-radius: 3px;
     position: absolute;
     transition: 0.5s ease-in-out;
+    box-shadow: darken(#499aff, 10) 0 2px 0
   }
 
   &__Label {
@@ -117,6 +127,7 @@ export default {
     transition: 0.25s ease-in-out;
     left: 50%;
     z-index: 5;
+    white-space: nowrap
 
     &::before,
     &::after {
