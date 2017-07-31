@@ -83,6 +83,7 @@ export default {
     height: 1.5rem;
     width: 100%;
     font-weight: 700;
+    line-height: 1;
   }
 
   &__Option {
@@ -100,9 +101,8 @@ export default {
   }
 
   &__Toggle {
-    padding: 1.75rem 0.75rem .35rem;
+    padding: 1.75rem 0.75rem 0.5rem;
     display: block;
-    line-height: 1;
 
     &::after {
       position: absolute;
@@ -126,7 +126,7 @@ export default {
   }
 
   &__Label {
-    top: 0.75rem;
+    top: 0.5rem;
     left: 0.75rem;
     position: absolute;
     display: block;

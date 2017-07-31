@@ -55,7 +55,7 @@ export default {
   methods: {
     submit() {
       this.isSubmitted = true;
-      this.submitted(this.profile);
+      this.submitted(Object.assign({}, this.profile));
     },
   },
 };
