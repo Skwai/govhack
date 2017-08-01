@@ -1,11 +1,12 @@
 <template>
   <main class="App">
-    <div class="App__Form">
+    <div class="App__Sidebar">
       <AppHeader></AppHeader>
       <FormFields
         :submitted="updateProfile"
         :disabled="loading"
       ></FormFields>
+      <AppFooter></AppFooter>
     </div>
     <div class="App__Content">
       <Loading v-if="loading"></Loading>
@@ -20,6 +21,7 @@
 
 <script>
 import AppHeader from './components/AppHeader';
+import AppFooter from './components/AppFooter';
 import FormFields from './components/FormFields';
 import Loading from './components/Loading';
 import Error from './components/Error';
@@ -60,6 +62,7 @@ export default {
     DataVisuals,
     AppHeader,
     GlobalVisuals,
+    AppFooter,
   },
   async created() {
     try {
@@ -164,13 +167,16 @@ small {
     position: relative;
   }
 
-  &__Form {
+  &__Sidebar {
     background: #fff;
     padding: 2rem;
     box-shadow: rgba(0,0,0,.05) 0 0 0 1px, rgba(0,0,0,.05) 0 0 10px;
     position: relative;
     z-index: 2;
     flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
 
     @media (min-width: 640px) {
       flex: 0 0 20rem;
