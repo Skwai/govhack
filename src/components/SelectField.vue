@@ -1,9 +1,9 @@
 <template>
   <div class="SelectField" :class="{ '-empty': !displayValue, '-expanded': expanded, '-disabled': disabled }">
-    <span class="SelectField__Toggle" @click="toggle">
+    <button class="SelectField__Toggle" @click="toggle">
       <span class="SelectField__Label">{{label}}</span>
       <span class="SelectField__Value">{{displayValue}}</span>
-    </span>
+    </button>
 
     <div class="SelectField__Options" :aria-expanded="expanded">
       <div
@@ -31,13 +31,11 @@ export default {
         this.expanded = !this.expanded;
       }
     },
+    open() {
+      this.expanded = true;
+    },
     close() {
       this.expanded = false;
-    },
-    documentClick(ev) {
-      if (!this.$el.contains(ev.target)) {
-        this.close();
-      }
     },
   },
   data() {
@@ -49,12 +47,6 @@ export default {
     displayValue() {
       return this.value;
     },
-  },
-  created() {
-    document.addEventListener('click', this.documentClick);
-  },
-  destroyed() {
-    document.removeEventListener('click', this.documentClick);
   },
 };
 </script>
@@ -103,6 +95,15 @@ export default {
   &__Toggle {
     padding: 1.75rem 0.75rem 0.5rem;
     display: block;
+    border: 0;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
 
     &::after {
       position: absolute;

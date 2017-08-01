@@ -109,7 +109,7 @@ export default {
     border-radius: 3px;
     position: absolute;
     transition: 0.5s ease-in-out;
-    box-shadow: darken(#499aff, 10) 0 2px 0
+    box-shadow: darken(#499aff, 10) 0 2px 0;
   }
 
   &__Label {
@@ -127,7 +127,7 @@ export default {
     transition: 0.25s ease-in-out;
     left: 50%;
     z-index: 5;
-    white-space: nowrap
+    white-space: nowrap;
 
     &::before,
     &::after {
