@@ -67,11 +67,10 @@ export default {
     align-items: center;
     position: relative;
     padding: 0.5rem (0.5rem + 1.25rem + 0.5rem) 0.5rem 0.75rem;
-    background: transparent;
+    background: #fff;
     border: 0;
     cursor: pointer;
     transition: 0.2s;
-    border-radius: 3px;
     font-size: 0.875rem;
     opacity: .5;
     white-space: nowrap;

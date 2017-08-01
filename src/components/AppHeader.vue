@@ -1,7 +1,7 @@
 <template>
   <header class="AppHeader">
-    <h1 class="AppHeader__Heading">WageSage</h1>
-    <p class="AppHeader__Description">Find out how your income compares to other Australians</p>
+    <h1 class="AppHeader__Heading" itemprop="name">WageSage</h1>
+    <p class="AppHeader__Description" itemprop="description">Find out how your income compares to other Australians</p>
   </header>
 </template>
 
