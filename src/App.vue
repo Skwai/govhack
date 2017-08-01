@@ -133,6 +133,7 @@ textarea {
 }
 
 small {
+  font-size: 87.5%
   opacity: .5
 }
 
