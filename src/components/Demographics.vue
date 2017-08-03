@@ -58,8 +58,6 @@ export default {
         state: null,
         gender: null,
       },
-      min: 0,
-      max: 0,
     };
   },
   components: {
@@ -79,10 +77,17 @@ export default {
         placement: 'top',
       };
     },
+    stats() {
+      return this.getDemographicsStats(this.compare);
+    },
+    min() {
+      return this.stats.min || 0;
+    },
+    max() {
+      return this.stats.max || 0;
+    },
     profileLabel() {
-      const { average, min, max } = this.getDemographicsStats(this.compare);
-      this.min = min;
-      this.max = max;
+      const { average } = this.stats;
       return {
         name: 'Avg',
         value: average,
