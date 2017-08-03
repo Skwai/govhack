@@ -48,21 +48,23 @@ export default {
         title: name,
         icon,
       });
-      const infowindow = new window.google.maps.InfoWindow({
-        content: `
-          <b>${name}</b>
-          <br><br>Average Salary is $${average.toLocaleString()}
-          <br>Median Salary is $${median.toLocaleString()}
-        `,
-      });
+      const infowindow = this.addInfowindow(`
+        <b>${name}</b>
+        <br><br>Average Salary is $${average.toLocaleString()}
+        <br>Median Salary is $${median.toLocaleString()}
+      `);
       marker.addListener('click', () => infowindow.open(map, marker));
       return marker;
+    },
+
+
+    addInfowindow(content) {
+      return new window.google.maps.InfoWindow({ content });
     },
 
     addClustersToMap(map, markers) {
       return new window.MarkerClusterer(map, markers, { imagePath: '/static/m' });
     },
-
 
     addHeatmapToMap(map, data) {
       return new window.google.maps.visualization.HeatmapLayer({
