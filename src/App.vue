@@ -126,7 +126,7 @@ textarea {
   color: #333;
   font-size: 1rem;
   line-height: 1.375;
-  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

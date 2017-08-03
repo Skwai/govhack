@@ -70,7 +70,6 @@ export default {
 
     postcodeAverageLabel() {
       const { average } = this.stats;
-
       return {
         name: `${this.profile.postcode} Avg`,
         value: average,

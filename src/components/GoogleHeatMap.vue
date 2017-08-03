@@ -58,7 +58,10 @@ export default {
     },
 
     addInfowindow(content) {
-      return new window.google.maps.InfoWindow({ content });
+      return new window.google.maps.InfoWindow({
+        content,
+        pixelOffset: new window.google.maps.Size(-20, 0),
+      });
     },
 
     addClustersToMap(map, markers) {
@@ -72,7 +75,6 @@ export default {
         radius: 50,
       });
     },
-
   },
   computed: {
     ...mapGetters([
