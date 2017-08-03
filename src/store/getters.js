@@ -11,8 +11,8 @@ const toInt = str => Number(str.replace(/,/g, ''));
  * @return {Number}
  */
 export const getAverageForState = ({ postcodes }) => (stateName) => {
-  const filtered = postcodes.filter(el => el.State === stateName);
-  const total = filtered.reduce((sum, value) => sum + toInt(value.Average), 0);
+  const filtered = postcodes.filter(el => el.state === stateName);
+  const total = filtered.reduce((sum, value) => sum + toInt(value.average), 0);
   const count = filtered.length;
   return total / count;
 };
@@ -23,7 +23,7 @@ export const getAverageForState = ({ postcodes }) => (stateName) => {
  * @return {String}
  */
 export const getPostcodeState = ({ postcodes }) => (postcode) => {
-  const maybeState = postcodes.find(el => el.Postcode === postcode);
+  const maybeState = postcodes.find(el => el.postcode === postcode);
   return maybeState ? maybeState.State : null;
 };
 
@@ -33,9 +33,9 @@ export const getPostcodeState = ({ postcodes }) => (postcode) => {
  */
 export const getPostcodeAverages = ({ postcodes }) =>
   postcodes.map(el => ({
-    postcode: el.Postcode,
-    average: toInt(el.Average),
-    median: toInt(el.Median),
+    postcode: el.postcode,
+    average: toInt(el.average),
+    median: toInt(el.median),
   }));
 
 /**
@@ -46,7 +46,7 @@ export const getPostcodeAverages = ({ postcodes }) =>
  * @return {Object}
  */
 export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
-  const data = postcodes.find(el => el.Postcode === postcode);
+  const data = postcodes.find(el => el.postcode === postcode);
 
   if (!data) {
     return {
@@ -56,9 +56,9 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
     };
   }
 
-  const average = toInt(data.Average);
-  const raw = (state ? (postcodes.filter(el => el.State === state)) : postcodes)
-    .map(el => toInt(el.Average));
+  const average = toInt(data.average);
+  const raw = (state ? (postcodes.filter(el => el.state === state)) : postcodes)
+    .map(el => toInt(el.average));
   const min = Math.min(...raw);
   const max = Math.max(...raw);
   return {
@@ -78,9 +78,9 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
  */
 export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
   const data = ages.filter((el) => {
-    const isGender = gender ? el.Gender.toLowerCase() === gender.toLowerCase() : true;
-    const isState = state ? el.State.toLowerCase() === state.toLowerCase() : true;
-    const isAge = age ? el.Age.toLowerCase().includes(age.toLowerCase()) : true;
+    const isGender = gender ? el.gender.toLowerCase() === gender.toLowerCase() : true;
+    const isState = state ? el.state.toLowerCase() === state.toLowerCase() : true;
+    const isAge = age ? el.age.toLowerCase().includes(age.toLowerCase()) : true;
     return isGender && isState && isAge;
   });
 
@@ -92,11 +92,11 @@ export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
     };
   }
 
-  const count = data.reduce((sum, value) => sum + toInt(value.Count), 0);
-  const total = data.reduce((sum, value) => sum + toInt(value['Income Sum']), 0);
+  const count = data.reduce((sum, value) => sum + toInt(value.count), 0);
+  const total = data.reduce((sum, value) => sum + toInt(value.incomeSum), 0);
   const average = total / count;
 
-  const raw = data.map(el => toInt(el['Average Income']));
+  const raw = data.map(el => toInt(el.averageIncome));
   const min = Math.min(...raw);
   const max = Math.max(...raw);
 
