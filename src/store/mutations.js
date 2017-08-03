@@ -1,9 +1,9 @@
 export const mutations = {
-  insertAgeRows(state, rows) {
-    state.ageRows = rows;
+  insertAges(state, ages) {
+    state.ages = rows;
   },
 
-  insertPostcodeRows(state, rows) {
-    state.postcodeRows = rows;
+  insertPostcodes(state, postcodes) {
+    state.postcodes = rows;
   }
 };
