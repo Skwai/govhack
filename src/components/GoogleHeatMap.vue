@@ -65,14 +65,12 @@ export default {
     },
 
     addClustersToMap(map, markers) {
-      // const icon = new window.ClusterIcon('https://wagesage.info/m1.png', 89, 89, 45, 45)
       return new window.MarkerClusterer(map, markers, {
         styles: [{
           url: '/static/m2.png',
           width: 55,
           height: 55,
         }],
-        // imagePath: '/static/m'
       });
     },
 
