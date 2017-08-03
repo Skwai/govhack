@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 /**
  * Convert a string to an integer
  * @param {String} str
