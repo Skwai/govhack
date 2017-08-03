@@ -27,8 +27,7 @@ import Loading from './components/Loading';
 import Error from './components/Error';
 import DataVisuals from './components/DataVisuals';
 import GlobalVisuals from './components/GlobalVisuals';
-
-import SheetsService from './services/Sheets';
+import Sheet from './services/Sheet';
 
 const ERROR_MESSAGE = 'Couldn\'t load data :(';
 
@@ -65,18 +64,15 @@ export default {
   },
   async created() {
     try {
-      const age = new SheetsService({
+      const ages = await (new Sheet({
         cols: ['Gender', 'State', 'Age', 'Count', 'Income Sum', 'Average Income'],
         sheetId: '112usd1vZmqUsTyqS_Qo4aKlI9DxZ8p4k2c4rVC3oVCI',
-      });
+      })).loadData();
 
-      const postcode = new SheetsService({
+      const postcodes = await (new Sheet({
         cols: ['State', 'Postcode', 'Average', 'Median', 'Count'],
         sheetId: '1716gXW9rhxUCkcpzt7Wgy7B-Z55AdNELEH_XZ4PNYHs',
-      });
-
-      const postcodes = await postcode.loadData();
-      const ages = await age.loadData();
+      })).loadData();
 
       this.$store.commit('insertAges', ages);
       this.$store.commit('insertPostcodes', postcodes);
