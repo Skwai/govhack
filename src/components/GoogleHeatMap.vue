@@ -57,7 +57,6 @@ export default {
       return marker;
     },
 
-
     addInfowindow(content) {
       return new window.google.maps.InfoWindow({ content });
     },
