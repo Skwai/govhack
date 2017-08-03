@@ -25,19 +25,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Block from './Block';
 import BlockHeading from './BlockHeading';
 import Bar from './Bar';
 import FilterField from './FilterField';
 import config from '../config';
-import StatsService from '../services/Stats';
 
 export default {
   props: ['profile'],
   data() {
     return {
-      min: 0,
-      max: 0,
       stateOptions: config.STATES,
       compare: {
         state: null,
@@ -45,6 +43,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'getPostcodeStats',
+    ]),
     profileLabel() {
       return {
         name: 'You',
@@ -52,16 +53,23 @@ export default {
         placement: 'top',
       };
     },
-    postcodeAverageLabel() {
+
+    stats() {
       const { postcode } = this.profile;
       const { state } = this.compare;
-      const { average, min, max } = StatsService.getPostcodeStats({
-        postcode,
-        state,
-      });
+      return this.getPostcodeStats({ postcode, state });
+    },
 
-      this.min = min;
-      this.max = max;
+    min() {
+      return this.stats.min || 0;
+    },
+
+    max() {
+      return this.stats.max || 0;
+    },
+
+    postcodeAverageLabel() {
+      const { average } = this.stats;
 
       return {
         name: `${this.profile.postcode} Avg`,
