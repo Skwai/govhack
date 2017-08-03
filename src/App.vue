@@ -29,7 +29,6 @@ import DataVisuals from './components/DataVisuals';
 import GlobalVisuals from './components/GlobalVisuals';
 
 import SheetsService from './services/Sheets';
-import StatsService from './services/Stats';
 
 const ERROR_MESSAGE = 'Couldn\'t load data :(';
 
@@ -76,11 +75,11 @@ export default {
         sheetId: '1716gXW9rhxUCkcpzt7Wgy7B-Z55AdNELEH_XZ4PNYHs',
       });
 
-      const postcodeRows = await postcode.loadData();
-      const ageRows = await age.loadData();
-      StatsService.ageData = ageRows;
-      StatsService.postcodeData = postcodeRows;
-      StatsService.calculateStats();
+      const postcodes = await postcode.loadData();
+      const ages = await age.loadData();
+
+      this.$store.commit('insertAges', ages);
+      this.$store.commit('insertPostcodes', postcodes);
     } catch (err) {
       this.error = ERROR_MESSAGE;
     } finally {

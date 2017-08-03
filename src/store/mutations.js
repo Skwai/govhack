@@ -1,9 +1,11 @@
-export const mutations = {
+/* eslint-disable no-param-reassign */
+
+export default {
   insertAges(state, ages) {
-    state.ages = rows;
+    state.ages = ages;
   },
 
   insertPostcodes(state, postcodes) {
-    state.postcodes = rows;
-  }
+    state.postcodes = postcodes;
+  },
 };

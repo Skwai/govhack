@@ -39,12 +39,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Bar from './Bar';
 import Block from './Block';
 import BlockHeading from './BlockHeading';
 import FilterField from './FilterField';
 import config from '../config';
-import StatsService from '../services/Stats';
 
 export default {
   props: ['profile', 'label', 'description'],
@@ -69,6 +69,9 @@ export default {
     BlockHeading,
   },
   computed: {
+    ...mapGetters([
+      'getDemographicsStats',
+    ]),
     averageLabel() {
       return {
         name: 'You',
@@ -77,7 +80,7 @@ export default {
       };
     },
     profileLabel() {
-      const { average, min, max } = StatsService.getDemographicsStats(this.compare);
+      const { average, min, max } = this.getDemographicsStats(this.compare);
       this.min = min;
       this.max = max;
       return {

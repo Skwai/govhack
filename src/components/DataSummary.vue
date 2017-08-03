@@ -25,39 +25,37 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import DataSummaryItem from './DataSummaryItem';
 import Block from './Block';
-import StatsService from '../services/Stats';
 
 export default {
   props: ['profile'],
-  data() {
-    return {
-      state: StatsService.getState(this.profile.postcode),
-    };
-  },
   components: {
     DataSummaryItem,
     Block,
   },
-  watch: {
-    'profile.postcode': function (postcode) {
-      this.state = StatsService.getState(postcode);
-    },
-  },
   computed: {
+    ...mapGetters([
+      'getDemographicsStats',
+      'getPostcodeState',
+    ]),
+    state() {
+      return this.getPostcodeState(this.profile.postcode);
+    },
     genderAverage() {
-      const { average } = StatsService.getDemographicsStats({ gender: this.profile.gender });
+      const { gender } = this.profile;
+      const { average } = this.getDemographicsStats({ gender });
       return (this.profile.income / average).toFixed(2);
     },
     ageAverage() {
-      const { average } = StatsService.getDemographicsStats({ age: this.profile.age });
+      const { age } = this.profile;
+      const { average } = this.getDemographicsStats({ age });
       return (this.profile.income / average).toFixed(2);
     },
     stateAverage() {
-      const { average } = StatsService.getDemographicsStats({
-        state: this.state,
-      });
+      const { state } = this.profile;
+      const { average } = this.getDemographicsStats({ state });
       return (this.profile.income / average).toFixed(2);
     },
   },
