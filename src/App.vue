@@ -127,6 +127,10 @@ textarea {
   -moz-osx-font-smoothing: grayscale;
 }
 
+address {
+  font-style: normal;
+}
+
 small {
   font-size: 87.5%
   opacity: .5

@@ -1,7 +1,8 @@
 <template>
   <footer class="AppFooter">
     <p><small>Data from <abbr title="Australian Taxation Office">ATO</abbr> income data.</small></p>
-    <p><small>
+    <address>
+      <small>
         By
         <span itemprop="author" itemscope itemtype="http://schema.org/Person">
           <meta itemprop="name" content="Cameron Jensen">
@@ -12,7 +13,8 @@
           <meta itemprop="name" content="William Bowling">
           <a itemprop="sameAs" href="https://twitter.com/wcbowling">@wcbowling</a>
         </span>
-      </small></p>
+      </small>
+    </address>
   </footer>
 </template>
 
