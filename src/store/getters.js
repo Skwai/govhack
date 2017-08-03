@@ -3,12 +3,12 @@
 /**
  * Convert a string to an integer
  * @param {String} str
+ * @return {Number}
  */
 const toInt = str => Number(str.replace(/,/g, ''));
 
 /**
  * Get the average for an Australian state
- * @param {Array} postcodes
  * @param {String} stateName
  * @return {Number}
  */
@@ -20,8 +20,7 @@ export const getAverageForState = ({ postcodes }) => (stateName) => {
 };
 
 /**
- * Get the state a postcode belongs to
- * @param {Array} postcodes
+ * Get the state name (eg. TAS, NSW) a postcode belongs to
  * @param {String} postcode
  * @return {String}
  */
@@ -32,7 +31,6 @@ export const getPostcodeState = ({ postcodes }) => (postcode) => {
 
 /**
  * Get the averages for all postcodes
- * @param {Array} postcodes
  * @return {Array}
  */
 export const getPostcodeAverages = ({ postcodes }) =>
@@ -44,7 +42,9 @@ export const getPostcodeAverages = ({ postcodes }) =>
 
 /**
  * Get the stats for a postcode
- * @param {*} param0
+ * @param {Object} param
+ * @param {String} param.postcode
+ * @param {String} param.state
  * @return {Object}
  */
 export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
@@ -72,10 +72,10 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
 
 /**
  * Get the data for a demographic
- * @param {Array} ages
- * @param {String} age
- * @param {String} gender
- * @param {String} state
+ * @param {Object} param
+ * @param {String} param.age
+ * @param {String} param.gender
+ * @param {String} param.state
  * @return {Object}
  */
 export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
@@ -85,6 +85,14 @@ export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
     const isAge = age ? el.Age.toLowerCase().includes(age.toLowerCase()) : true;
     return isGender && isState && isAge;
   });
+
+  if (!data) {
+    return {
+      average: null,
+      max: null,
+      min: null,
+    };
+  }
 
   const count = data.reduce((sum, value) => sum + toInt(value.Count), 0);
   const total = data.reduce((sum, value) => sum + toInt(value['Income Sum']), 0);
@@ -99,16 +107,4 @@ export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
     min,
     max,
   };
-};
-
-export const getAverageSalary = ({ postcodes }) => {
-  const averages = postcodes.map(el => toInt(el.Average));
-  const total = averages.reduce((sum, value) => sum + value, 0);
-  return total / postcodes.length;
-};
-
-export const getMedianSalary = ({ postcodes }) => {
-  const medians = postcodes.map(el => toInt(el.Median));
-  const total = medians.reduce((sum, value) => sum + value, 0);
-  return total / postcodes.length;
 };

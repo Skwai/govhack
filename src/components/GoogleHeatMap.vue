@@ -58,8 +58,21 @@ export default {
       marker.addListener('click', () => infowindow.open(map, marker));
       return marker;
     },
-  },
 
+    addClustersToMap(map, markers) {
+      return new window.MarkerClusterer(map, markers, { imagePath: '/static/m' });
+    },
+
+
+    addHeatmapToMap(map, data) {
+      return new window.google.maps.visualization.HeatmapLayer({
+        data,
+        map,
+        radius: 50,
+      });
+    },
+
+  },
   computed: {
     ...mapGetters([
       'getPostcodeAverages',
@@ -87,14 +100,8 @@ export default {
       }
     });
 
-
-    this.clusters = new window.MarkerClusterer(map, markers, { imagePath: '/static/m' });
-
-    this.heatmap = new window.google.maps.visualization.HeatmapLayer({
-      data: points,
-      map,
-      radius: 50,
-    });
+    this.addClustersToMap(map, markers);
+    this.addHeatmapToMap(map, points);
   },
 };
 </script>
