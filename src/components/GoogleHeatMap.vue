@@ -5,6 +5,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import mapStyles from '../misc/mapStyles';
+import mapIcon from '../misc/mapIcon';
 
 export default {
   data() {
@@ -31,13 +32,16 @@ export default {
     },
 
     getIcon() {
-      return new window.google.maps.MarkerImage(
-        '/static/marker.png',
-        new window.google.maps.Size(76, 94),
-        new window.google.maps.Point(0, 0),
-        new window.google.maps.Point(0, 0),
-        new window.google.maps.Size(76 / 2, 94 / 2),
-      );
+      const width = 51;
+      const height = 64;
+
+      return {
+        url: mapIcon,
+        size: new window.google.maps.Size(width, height),
+        origin: new window.google.maps.Point(0, 0),
+        anchor: new window.google.maps.Point(0, 0),
+        scaledSize: new window.google.maps.Size(width, height),
+      };
     },
 
     addPostcodeToMap(map, postcode) {
@@ -67,9 +71,12 @@ export default {
     addClustersToMap(map, markers) {
       return new window.MarkerClusterer(map, markers, {
         styles: [{
-          url: '/static/m2.png',
-          width: 55,
-          height: 55,
+          url: mapIcon,
+          width: 53,
+          height: 66,
+          textSize: 12,
+          fontFamily: 'Roboto',
+          anchorText: [-7, 0],
         }],
       });
     },
