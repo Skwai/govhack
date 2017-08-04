@@ -72,6 +72,7 @@ export default {
   }
 
   &__Label {
+    cursor: text;
     top: 0.5rem;
     left: 0.75rem;
     position: absolute;
@@ -81,6 +82,7 @@ export default {
     transform-origin: top left;
     transition: transform .25s;
     cursor: text;
+    z-index: -1;
 
     .-empty & {
       transform: translate3d(0, 0.5rem, 0) scale(1);

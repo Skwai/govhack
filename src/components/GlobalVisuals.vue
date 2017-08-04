@@ -17,8 +17,8 @@ export default {
 
 <style scoped lang="stylus">
 .GlobalVisuals {
-    width: 100%;
-    height: 100vh;
-    margin: -2rem -2rem -2rem -2rem;
+  width: 100%;
+  height: 100vh;
+  margin: -2rem -2rem -2rem -2rem;
 }
 </style>
