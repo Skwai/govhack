@@ -18,7 +18,6 @@
 </template>
 
 <script>
-
 export default {
   props: ['options', 'label', 'disabled', 'value', 'update'],
   methods: {
@@ -37,11 +36,22 @@ export default {
     close() {
       this.expanded = false;
     },
+    documentClick(ev) {
+      if (!this.$el.contains(ev.target)) {
+        this.close();
+      }
+    },
   },
   data() {
     return {
       expanded: false,
     };
+  },
+  mounted() {
+    document.addEventListener('click', this.documentClick);
+  },
+  destroyed() {
+    document.removeEventListener('click', this.documentClick);
   },
   computed: {
     displayValue() {
@@ -157,7 +167,7 @@ export default {
     box-shadow: rgba(0,0,0,.2) 0 1px 2px, rgba(0,0,0,.125) 0 2px 1rem, rgba(0,0,0,.15) 0 5px 10px;
     z-index: 2;
     max-width: 100%;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     overflow-y: auto;
     text-align: left;
 
@@ -171,6 +181,7 @@ export default {
     cursor: pointer;
     padding: 0.75rem 0.75rem;
     transition: 0.2s;
+    white-space: nowrap;
 
     &.-selected {
       color: #499aff;

@@ -1,21 +1,29 @@
 <template>
-  <div class="GoogleHeatMap"></div>
+  <div class="GoogleHeatMap">
+    <Loading v-if="loading"></Loading>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import mapStyles from '../misc/mapStyles';
 import mapIcon from '../misc/mapIcon';
+import Loading from './Loading';
 
 export default {
   data() {
     return {
-      postcodes: {},
+      loading: true,
+      locations: {},
     };
   },
 
+  components: {
+    Loading,
+  },
+
   methods: {
-    async loadPostcodeData() {
+    async loadPostcodeLocations() {
       // Based on https://gist.github.com/randomecho/5020859
       const response = await fetch('/static/postcodes.json');
       return response.json();
@@ -90,21 +98,24 @@ export default {
     },
   },
   computed: {
-    ...mapGetters([
-      'getPostcodeAverages',
-    ]),
+    ...mapGetters(['getPostcodeAverages']),
   },
 
   async mounted() {
-    const postcodes = await this.loadPostcodeData();
+    let locations;
+    try {
+      locations = await this.loadPostcodeLocations();
+    } finally {
+      this.loading = false;
+    }
     const map = this.initMap();
     const averages = this.getPostcodeAverages;
     const markers = [];
     const points = [];
 
     averages.forEach((el) => {
-      if (el.postcode in postcodes) {
-        const postcode = postcodes[el.postcode];
+      if (el.postcode in locations) {
+        const postcode = locations[el.postcode];
         const { longitude, latitude } = postcode;
         const { average, median } = el;
         const marker = this.addPostcodeToMap(map, Object.assign({}, postcode, { average, median }));
@@ -129,5 +140,8 @@ export default {
   position: absolute !important;
   left: 0;
   top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

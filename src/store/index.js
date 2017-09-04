@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     postcodes: [],
     ages: [],
+    industries: [],
   },
   getters,
   mutations,

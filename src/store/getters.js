@@ -1,3 +1,5 @@
+/* eslint-disable no-confusing-arrow */
+
 /**
  * Convert a string to an integer
  * @param {String} str
@@ -61,6 +63,7 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
     .map(el => toInt(el.average));
   const min = Math.min(...raw);
   const max = Math.max(...raw);
+
   return {
     average,
     min,
@@ -77,12 +80,43 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
  * @return {Object}
  */
 export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
-  const data = ages.filter((el) => {
-    const isGender = gender ? el.gender.toLowerCase() === gender.toLowerCase() : true;
-    const isState = state ? el.state.toLowerCase() === state.toLowerCase() : true;
-    const isAge = age ? el.age.toLowerCase().includes(age.toLowerCase()) : true;
-    return isGender && isState && isAge;
-  });
+  const data = ages
+    .filter(el => gender ? el.gender.toLowerCase() === gender.toLowerCase() : true)
+    .filter(el => state ? el.state.toLowerCase() === state.toLowerCase() : true)
+    .filter(el => age ? el.age.toLowerCase() === age.toLowerCase() : true);
+
+  if (!data || !data.length) {
+    return {
+      average: null,
+      max: null,
+      min: null,
+    };
+  }
+
+  const count = data.reduce((sum, el) => sum + toInt(el.count), 0);
+  const total = data.reduce((sum, { incomeSum }) => sum + toInt(incomeSum), 0);
+  const average = total / count;
+
+  const values = data.map(el => toInt(el.averageIncome));
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+
+  return {
+    average,
+    min,
+    max,
+  };
+};
+
+/**
+ * Get the stats to compare industry
+ */
+export const getIndustryStats = ({ industries }) => ({ gender, industry, state }) => {
+  // debugger;
+  const data = industries
+    .filter(el => gender ? el.gender.toLowerCase() === gender.toLowerCase() : true)
+    .filter(el => industry ? el.industry.toLowerCase() === industry.toLowerCase() : true)
+    .filter(el => state ? el.state.toLowerCase() === state.toLowerCase() : true);
 
   if (!data) {
     return {
@@ -92,17 +126,33 @@ export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
     };
   }
 
-  const count = data.reduce((sum, value) => sum + toInt(value.count), 0);
-  const total = data.reduce((sum, value) => sum + toInt(value.incomeSum), 0);
+  const count = data.reduce((sum, { countSalary }) => sum + toInt(countSalary), 0);
+  const total = data.reduce((sum, { salary }) => sum + toInt(salary), 0);
   const average = total / count;
 
-  const raw = data.map(el => toInt(el.averageIncome));
-  const min = Math.min(...raw);
-  const max = Math.max(...raw);
+  // to do: calculate min/max
+  const values = data.map(el => el.salary / el.salaryCount);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
 
   return {
     average,
     min,
     max,
   };
+};
+
+/**
+ * Get an array of industry types
+ * @param {Object} params
+ * @return {Array}
+ */
+export const getIndustryTypes = ({ industries }) => {
+  const arr = industries.map(el => el.industry);
+  return [...new Set(arr)].sort();
+};
+
+export const getAges = ({ ages }) => {
+  const arr = ages.map(el => el.age.split('.').pop());
+  return [...new Set(arr)].sort();
 };

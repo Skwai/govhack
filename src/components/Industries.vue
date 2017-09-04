@@ -2,8 +2,22 @@
   <Block>
     <div class="Chart">
       <header class="Chart__Intro">
-        <BlockHeading>Your Postcode <small>({{profile.postcode}})</small></BlockHeading>
+        <BlockHeading>Industries</BlockHeading>
         <div class="Chart__Filters">
+          <FilterField
+            :value.sync="compare.industry"
+            :options="getIndustryTypes"
+            nullLabel="All"
+          >
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="#000" stroke-miterlimit="10"><path d="M6.5 12.3v6.2c0 1.7 2.7 3 6 3s6-1.3 6-3v-6.2" data-cap="butt" data-color="color-2"/><path d="M21.5 10.2v7.3" data-cap="butt"/><path d="M12.5 16.5l-10-7 10-6 10 6z" stroke-linecap="square"/></g></svg>
+          </FilterField>
+          <FilterField
+            :value.sync="compare.gender"
+            :options="genderOptions"
+            nullLabel="All"
+          >
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="#000" stroke-miterlimit="10" stroke-linecap="square"><path d="M5.5 6.5c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm2 16h-4v-5h-2v-6c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v6h-2v5z"/><path d="M17.5 6.5c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm2 16h-4v-4h-3l3-9h4l3 9h-3z"/></g></svg>
+          </FilterField>
           <FilterField
             :value.sync="compare.state"
             :options="stateOptions"
@@ -15,7 +29,7 @@
       </header>
 
       <Bar
-        :tooltipTitle="`Suburbs in ${compare.state ? compare.state : 'Australia'}`"
+        tooltipTitle="Selected segments"
         :min="min"
         :max="max"
         :labels="labels"
@@ -26,9 +40,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import Bar from './Bar';
 import Block from './Block';
 import BlockHeading from './BlockHeading';
-import Bar from './Bar';
 import FilterField from './FilterField';
 import config from '../config';
 
@@ -36,42 +50,46 @@ export default {
   props: ['profile'],
   data() {
     return {
+      genderOptions: config.GENDERS,
       stateOptions: config.STATES,
       compare: {
         state: null,
+        gender: null,
+        industry: null,
       },
     };
   },
+  components: {
+    Bar,
+    FilterField,
+    Block,
+    BlockHeading,
+  },
   computed: {
     ...mapGetters([
-      'getPostcodeStats',
+      'getIndustryStats',
+      'getIndustryTypes',
     ]),
-    profileLabel() {
+    averageLabel() {
       return {
         name: 'You',
-        value: this.profile.income,
+        value: Number(this.profile.income),
         placement: 'top',
       };
     },
-
     stats() {
-      const { postcode } = this.profile;
-      const { state } = this.compare;
-      return this.getPostcodeStats({ postcode, state });
+      return this.getIndustryStats(this.compare);
     },
-
     min() {
       return this.stats.min || 0;
     },
-
     max() {
       return this.stats.max || 0;
     },
-
-    postcodeAverageLabel() {
+    profileLabel() {
       const { average } = this.stats;
       return {
-        name: `${this.profile.postcode} Avg`,
+        name: 'Avg',
         value: average,
         placement: 'bottom',
       };
@@ -79,15 +97,9 @@ export default {
     labels() {
       return [
         this.profileLabel,
-        this.postcodeAverageLabel,
+        this.averageLabel,
       ];
     },
-  },
-  components: {
-    Bar,
-    FilterField,
-    Block,
-    BlockHeading,
   },
 };
 </script>
