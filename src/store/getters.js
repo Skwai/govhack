@@ -83,7 +83,7 @@ export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
   const data = ages
     .filter(el => gender ? el.gender.toLowerCase() === gender.toLowerCase() : true)
     .filter(el => state ? el.state.toLowerCase() === state.toLowerCase() : true)
-    .filter(el => age ? el.age.toLowerCase() === age.toLowerCase() : true);
+    .filter(el => age ? el.age.toLowerCase().includes(age.toLowerCase()) : true);
 
   if (!data || !data.length) {
     return {
@@ -110,9 +110,12 @@ export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
 
 /**
  * Get the stats to compare industry
+ * @param {Object} param
+ * @param {String} param.gender
+ * @param {String} param.industry
+ * @param {String} param.state
  */
 export const getIndustryStats = ({ industries }) => ({ gender, industry, state }) => {
-  // debugger;
   const data = industries
     .filter(el => gender ? el.gender.toLowerCase() === gender.toLowerCase() : true)
     .filter(el => industry ? el.industry.toLowerCase() === industry.toLowerCase() : true)
@@ -130,10 +133,13 @@ export const getIndustryStats = ({ industries }) => ({ gender, industry, state }
   const total = data.reduce((sum, { salary }) => sum + toInt(salary), 0);
   const average = total / count;
 
-  // to do: calculate min/max
-  const values = data.map(el => el.salary / el.salaryCount);
-  const min = Math.min(...values);
-  const max = Math.max(...values);
+  const industryAverages = industries
+    .filter(el => industry ? el.industry.toLowerCase() === industry.toLowerCase() : true)
+    .map(el => toInt(el.salary) / toInt(el.countSalary))
+    .map(val => isNaN(val) ? 0 : val);
+
+  const min = Math.min(...industryAverages);
+  const max = Math.max(...industryAverages);
 
   return {
     average,
