@@ -78,7 +78,7 @@ export default {
       const industries = await (new Sheet({
         cols: ['State', 'Gender', 'Industry', 'Count', 'Count Salary', 'Salary'],
         sheetId: config.GOOGLE_SHEET_IDS.INDUSTRIES,
-      }).loadData());
+      })).loadData();
 
       this.$store.commit('insertAges', ages);
       this.$store.commit('insertPostcodes', postcodes);

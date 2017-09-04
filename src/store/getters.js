@@ -5,7 +5,7 @@
  * @param {String} str
  * @return {Number}
  */
-const toInt = str => Number(str.replace(/,/g, ''));
+const toInt = str => Number(String(str).replace(/,/g, ''));
 
 /**
  * Get the average for an Australian state
@@ -40,6 +40,10 @@ export const getPostcodeAverages = ({ postcodes }) =>
     median: toInt(el.median),
   }));
 
+export const getStatePostcodeAverages = ({ postcodes }) => ({ state = null }) =>
+  (state ? (postcodes.filter(el => el.state === state)) : postcodes)
+    .map(el => toInt(el.average));
+
 /**
  * Get the stats for a postcode
  * @param {Object} param
@@ -48,7 +52,7 @@ export const getPostcodeAverages = ({ postcodes }) =>
  * @return {Object}
  */
 export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
-  const data = postcodes.find(el => el.postcode === postcode);
+  const data = postcodes.find(el => toInt(el.postcode) === toInt(postcode));
 
   if (!data) {
     return {
@@ -59,10 +63,9 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
   }
 
   const average = toInt(data.average);
-  const raw = (state ? (postcodes.filter(el => el.state === state)) : postcodes)
-    .map(el => toInt(el.average));
-  const min = Math.min(...raw);
-  const max = Math.max(...raw);
+  const stateAverages = getStatePostcodeAverages({ postcodes })({ state });
+  const min = Math.min(...stateAverages);
+  const max = Math.max(...stateAverages);
 
   return {
     average,
@@ -108,6 +111,11 @@ export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
   };
 };
 
+export const getIndustryAverages = ({ industries }) => ({ industry }) => industries
+  .filter(el => industry ? el.industry.toLowerCase() === industry.toLowerCase() : true)
+  .map(el => toInt(el.salary) / toInt(el.countSalary))
+  .map(val => isNaN(val) ? 0 : val.toFixed());
+
 /**
  * Get the stats to compare industry
  * @param {Object} param
@@ -121,7 +129,7 @@ export const getIndustryStats = ({ industries }) => ({ gender, industry, state }
     .filter(el => industry ? el.industry.toLowerCase() === industry.toLowerCase() : true)
     .filter(el => state ? el.state.toLowerCase() === state.toLowerCase() : true);
 
-  if (!data) {
+  if (!data || !data.length) {
     return {
       average: null,
       max: null,
@@ -133,11 +141,7 @@ export const getIndustryStats = ({ industries }) => ({ gender, industry, state }
   const total = data.reduce((sum, { salary }) => sum + toInt(salary), 0);
   const average = total / count;
 
-  const industryAverages = industries
-    .filter(el => industry ? el.industry.toLowerCase() === industry.toLowerCase() : true)
-    .map(el => toInt(el.salary) / toInt(el.countSalary))
-    .map(val => isNaN(val) ? 0 : val);
-
+  const industryAverages = getIndustryAverages({ industries })({ industry });
   const min = Math.min(...industryAverages);
   const max = Math.max(...industryAverages);
 
@@ -158,6 +162,11 @@ export const getIndustryTypes = ({ industries }) => {
   return [...new Set(arr)].sort();
 };
 
+/**
+ * Get an array of ages
+ * @param {Object} params
+ * @return {Array}
+ */
 export const getAges = ({ ages }) => {
   const arr = ages.map(el => el.age.split('.').pop());
   return [...new Set(arr)].sort();
