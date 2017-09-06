@@ -48,11 +48,11 @@ export default {
     return {
       isSubmitted: false,
       profile: {
-        income: 20000,
-        postcode: 7000,
-        age: '25 - 29',
-        gender: 'Male',
-        industry: 'Professional, Scientific and Technical Services',
+        income: null,
+        postcode: null,
+        age: null,
+        gender: null,
+        industry: null,
       },
     };
   },
