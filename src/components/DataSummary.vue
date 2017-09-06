@@ -54,22 +54,22 @@ export default {
     },
     industryAverage() {
       const { industry } = this.profile;
-      const average = this.getIndustryAverage({ industry });
+      const average = this.getIndustryAverage(industry);
       return (this.profile.income / average).toFixed(2);
     },
     genderAverage() {
       const { gender } = this.profile;
-      const average = this.getGenderAverage({ gender });
+      const average = this.getGenderAverage(gender);
       return (this.profile.income / average).toFixed(2);
     },
     ageAverage() {
       const { age } = this.profile;
-      const average = this.getAgeAverage({ age });
+      const average = this.getAgeAverage(age);
       return (this.profile.income / average).toFixed(2);
     },
     stateAverage() {
       const { state } = this.profile;
-      const average = this.getStateAverage({ state });
+      const average = this.getStateAverage(state);
       return (this.profile.income / average).toFixed(2);
     },
   },
