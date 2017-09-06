@@ -12,10 +12,20 @@ const toInt = str => Number(String(str).replace(/,/g, ''));
  * @param {String} stateName
  * @return {Number}
  */
-export const getAverageForState = ({ postcodes }) => (stateName) => {
-  const filtered = postcodes.filter(el => el.state === stateName);
+export const getAverageForState = ({ postcodes }) => (state = null) => {
+  const filtered = postcodes.filter(el => el.state === state);
   const total = filtered.reduce((sum, value) => sum + toInt(value.average), 0);
   const count = filtered.length;
+  return total / count;
+};
+
+/**
+ * Get the average for an Australian state
+ * @return {Number}
+ */
+export const getNationalAverage = ({ postcodes }) => {
+  const total = postcodes.reduce((sum, value) => sum + toInt(value.average), 0);
+  const count = postcodes.length;
   return total / count;
 };
 
@@ -30,12 +40,13 @@ export const getPostcodeState = ({ postcodes }) => (postcode) => {
 };
 
 /**
- *
+ * Get the average income for a postcode
+ * @param {String} postcode
+ * @return {Number}
  */
 export const getPostcodeAverage = ({ postcodes }) => (postcode) => {
-  const [match] = postcodes.filter(el => toInt(el.postcode) === toInt(postcode));
-  if (!match) return null;
-  return toInt(match.average);
+  const match = postcodes.find(el => toInt(el.postcode) === toInt(postcode));
+  return match ? toInt(match.average) : getNationalAverage({ postcodes });
 };
 
 /**
@@ -50,7 +61,9 @@ export const getPostcodeAverages = ({ postcodes }) =>
   }));
 
 /**
- *
+ * Get all the average incomes for the postcodes in a state
+ * @param {String} state
+ * @return {Array}
  */
 export const getStatePostcodeAverages = ({ postcodes }) => (state = null) =>
   (state ? (postcodes.filter(el => el.state === state)) : postcodes)
@@ -60,13 +73,12 @@ export const getStatePostcodeAverages = ({ postcodes }) => (state = null) =>
  * Get the stats for a postcode
  * @param {Object} param
  * @param {String} param.postcode
- * @param {String} param.state
  * @return {Object}
  */
-export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
-  const data = postcodes.find(el => toInt(el.postcode) === toInt(postcode));
+export const getPostcodeStats = ({ postcodes }) => (postcode) => {
+  const average = getPostcodeAverage({ postcodes })(postcode);
 
-  if (!data) {
+  if (!average) {
     return {
       average: null,
       max: null,
@@ -74,7 +86,7 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
     };
   }
 
-  const average = toInt(data.average);
+  const state = getPostcodeState({ postcodes })(postcode);
   const stateAverages = getStatePostcodeAverages({ postcodes })(state);
   const min = Math.min(...stateAverages);
   const max = Math.max(...stateAverages);
@@ -87,7 +99,9 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
 };
 
 /**
- *
+ * Get the average income for a gender
+ * @param {String} gender
+ * @return {Number}
  */
 export const getGenderAverage = ({ ages }) => (gender = null) => {
   const data = ages
@@ -98,7 +112,9 @@ export const getGenderAverage = ({ ages }) => (gender = null) => {
 };
 
 /**
- *
+ * Get the average income for an age segment
+ * @param {String} age (eg. "25 - 29")
+ * @return {Number}
  */
 export const getAgeAverage = ({ ages }) => (age = null) => {
   const data = ages
@@ -109,6 +125,9 @@ export const getAgeAverage = ({ ages }) => (age = null) => {
 };
 
 /**
+ * Get the average income for a state
+ * @param {String} state
+ * @return {Number}
  */
 export const getStateAverage = ({ ages }) => (state = null) => {
   const data = ages
@@ -119,7 +138,9 @@ export const getStateAverage = ({ ages }) => (state = null) => {
 };
 
 /**
- * @param {Object}
+ * Get the average income for an industry
+ * @param {String} industry
+ * @return {Number}
  */
 export const getIndustryAverage = ({ industries }) => (industry = null) => {
   const data = industries
@@ -167,7 +188,9 @@ export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
 };
 
 /**
- *
+ * Get all of the average incomes for an industry
+ * @return {String} industry
+ * @return {Array}
  */
 export const getIndustryAverages = ({ industries }) => (industry = null) => industries
   .filter(el => industry ? el.industry.toLowerCase() === industry.toLowerCase() : true)

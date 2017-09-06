@@ -56,8 +56,7 @@ export default {
 
     stats() {
       const { postcode } = this.profile;
-      const { state } = this.compare;
-      return this.getPostcodeStats({ postcode, state });
+      return this.getPostcodeStats(postcode);
     },
 
     min() {
