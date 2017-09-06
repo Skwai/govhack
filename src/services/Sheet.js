@@ -73,7 +73,7 @@ export default class Sheet {
    * @return {String}
    */
   static toCamelCase(str) {
-    const [first, ...acc] = str.replace(/[^\w\d]/g, ' ').split(/\s+/);
+    const [first, ...acc] = str.trim().replace(/[^\w\d]/g, ' ').split(/\s+/);
     return first.toLowerCase() + acc.map(x => x.charAt(0).toUpperCase() + x.slice(1).toLowerCase()).join('');
   }
 }

@@ -12,8 +12,11 @@ export const toInt = str => Number(String(str).replace(/,/g, ''));
  * @param {String} stateName
  * @return {Number}
  */
-export const getAverageForState = ({ postcodes }) => (state = null) => {
-  const filtered = postcodes.filter(el => state ? el.state === state : true);
+export const getAverageForState = ({ postcodes }) => (state) => {
+  const filtered = postcodes.filter(el => el.state === state);
+
+  if (!filtered.length) return null;
+
   const total = filtered.reduce((sum, value) => sum + toInt(value.average), 0);
   const count = filtered.length;
   return total / count;
@@ -35,7 +38,7 @@ export const getNationalAverage = ({ postcodes }) => {
  * @return {String}
  */
 export const getPostcodeState = ({ postcodes }) => (postcode) => {
-  const state = postcodes.find(el => el.postcode === postcode);
+  const state = postcodes.find(el => String(el.postcode) === String(postcode));
   return state ? state.state : null;
 };
 
@@ -45,8 +48,8 @@ export const getPostcodeState = ({ postcodes }) => (postcode) => {
  * @return {Number}
  */
 export const getPostcodeAverage = ({ postcodes }) => (postcode) => {
-  const match = postcodes.find(el => toInt(el.postcode) === toInt(postcode));
-  return match ? toInt(match.average) : getNationalAverage({ postcodes });
+  const match = postcodes.find(el => String(el.postcode) === String(postcode));
+  return match ? toInt(match.average) : null;
 };
 
 /**
