@@ -75,6 +75,49 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
 };
 
 /**
+ *
+ */
+export const getGenderAverage = ({ ages }) => ({ gender = null }) => {
+  const data = ages
+    .filter(el => gender ? el.gender.toLowerCase() === gender.toLowerCase() : true);
+  const count = data.reduce((sum, el) => sum + toInt(el.count), 0);
+  const total = data.reduce((sum, { incomeSum }) => sum + toInt(incomeSum), 0);
+  return total / count;
+};
+
+/**
+ *
+ */
+export const getAgeAverage = ({ ages }) => ({ age = null }) => {
+  const data = ages
+    .filter(el => age ? el.age.toLowerCase().includes(age.toLowerCase()) : true);
+  const count = data.reduce((sum, el) => sum + toInt(el.count), 0);
+  const total = data.reduce((sum, { incomeSum }) => sum + toInt(incomeSum), 0);
+  return total / count;
+};
+
+/**
+ */
+export const getStateAverage = ({ ages }) => ({ state = null }) => {
+  const data = ages
+    .filter(el => state ? el.state.toLowerCase() === state.toLowerCase() : true);
+  const count = data.reduce((sum, el) => sum + toInt(el.count), 0);
+  const total = data.reduce((sum, { incomeSum }) => sum + toInt(incomeSum), 0);
+  return total / count;
+};
+
+/**
+ *
+ */
+export const getIndustryAverage = ({ industries }) => ({ industry = null }) => {
+  const data = industries
+    .filter(el => industry ? el.industry.toLowerCase() === industry.toLowerCase() : true);
+  const count = data.reduce((sum, { countSalary }) => sum + toInt(countSalary), 0);
+  const total = data.reduce((sum, { salary }) => sum + toInt(salary), 0);
+  return total / count;
+};
+
+/**
  * Get the data for a demographic
  * @param {Object} param
  * @param {String} param.age
@@ -111,6 +154,9 @@ export const getDemographicsStats = ({ ages }) => ({ age, gender, state }) => {
   };
 };
 
+/**
+ *
+ */
 export const getIndustryAverages = ({ industries }) => ({ industry }) => industries
   .filter(el => industry ? el.industry.toLowerCase() === industry.toLowerCase() : true)
   .map(el => toInt(el.salary) / toInt(el.countSalary))

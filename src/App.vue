@@ -186,7 +186,8 @@ small {
     justify-content: stretch;
 
     @media (min-width: 640px) {
-      flex: 0 0 24rem;
+      flex: 0 0 20rem;
+      max-width: 20rem;
       min-height: 100vh;
     }
   }
