@@ -5,7 +5,7 @@
  * @param {String} str
  * @return {Number}
  */
-const toInt = str => Number(String(str).replace(/,/g, ''));
+export const toInt = str => Number(String(str).replace(/,/g, ''));
 
 /**
  * Get the average for an Australian state
@@ -13,7 +13,7 @@ const toInt = str => Number(String(str).replace(/,/g, ''));
  * @return {Number}
  */
 export const getAverageForState = ({ postcodes }) => (state = null) => {
-  const filtered = postcodes.filter(el => el.state === state);
+  const filtered = postcodes.filter(el => state ? el.state === state : true);
   const total = filtered.reduce((sum, value) => sum + toInt(value.average), 0);
   const count = filtered.length;
   return total / count;
