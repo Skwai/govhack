@@ -11,8 +11,8 @@
       <div class="DataSummary__Item">
         <DataSummaryItem
           label="State"
-          :value="stateAverage"
-        >Compared to others living in <strong>{{state ? state : 'Australia'}}</strong></DataSummaryItem>
+          :value="postcodeAverage"
+        >Compared to others living in <strong>{{profile.postcode ? profile.postcode : 'Australia'}}</strong></DataSummaryItem>
       </div>
       <div class="DataSummary__Item">
         <DataSummaryItem
@@ -46,7 +46,7 @@ export default {
       'getGenderAverage',
       'getAgeAverage',
       'getIndustryAverage',
-      'getStateAverage',
+      'getPostcodeAverage',
       'getPostcodeState',
     ]),
     state() {
@@ -67,9 +67,9 @@ export default {
       const average = this.getAgeAverage(age);
       return (this.profile.income / average).toFixed(2);
     },
-    stateAverage() {
-      const { state } = this.profile;
-      const average = this.getStateAverage(state);
+    postcodeAverage() {
+      const { postcode } = this.profile;
+      const average = this.getPostcodeAverage(postcode);
       return (this.profile.income / average).toFixed(2);
     },
   },

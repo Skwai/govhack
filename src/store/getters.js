@@ -25,8 +25,17 @@ export const getAverageForState = ({ postcodes }) => (stateName) => {
  * @return {String}
  */
 export const getPostcodeState = ({ postcodes }) => (postcode) => {
-  const maybeState = postcodes.find(el => el.postcode === postcode);
-  return maybeState ? maybeState.State : null;
+  const state = postcodes.find(el => el.postcode === postcode);
+  return state ? state.state : null;
+};
+
+/**
+ *
+ */
+export const getPostcodeAverage = ({ postcodes }) => (postcode) => {
+  const [match] = postcodes.filter(el => toInt(el.postcode) === toInt(postcode));
+  if (!match) return null;
+  return toInt(match.average);
 };
 
 /**
@@ -66,7 +75,7 @@ export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
   }
 
   const average = toInt(data.average);
-  const stateAverages = getStatePostcodeAverages({ postcodes })({ state });
+  const stateAverages = getStatePostcodeAverages({ postcodes })(state);
   const min = Math.min(...stateAverages);
   const max = Math.max(...stateAverages);
 
