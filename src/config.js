@@ -5,16 +5,6 @@ export default {
     INDUSTRIES: '1hYK83DDjrzWmjDbcTXytltUB-tfkZwWIrtfz4kp20Sg',
   },
   MAPS_API_KEY: 'AIzaSyAXKCeBwTPQRBGKiM7Ce8b93z_ykVnhjYU',
-  STATES: [
-    'ACT',
-    'NSW',
-    'NT',
-    'SA',
-    'TAS',
-    'QLD',
-    'VIC',
-    'WA',
-  ],
   GENDERS: [
     'Male',
     'Female',

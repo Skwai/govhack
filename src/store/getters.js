@@ -75,7 +75,7 @@ export const getStatePostcodeAverages = ({ postcodes }) => (state = null) =>
  * @param {String} param.postcode
  * @return {Object}
  */
-export const getPostcodeStats = ({ postcodes }) => (postcode) => {
+export const getPostcodeStats = ({ postcodes }) => ({ postcode, state }) => {
   const average = getPostcodeAverage({ postcodes })(postcode);
 
   if (!average) {
@@ -86,7 +86,6 @@ export const getPostcodeStats = ({ postcodes }) => (postcode) => {
     };
   }
 
-  const state = getPostcodeState({ postcodes })(postcode);
   const stateAverages = getStatePostcodeAverages({ postcodes })(state);
   const min = Math.min(...stateAverages);
   const max = Math.max(...stateAverages);
@@ -235,7 +234,6 @@ export const getIndustryStats = ({ industries }) => ({ gender, industry, state }
 
 /**
  * Get an array of industry types
- * @param {Object} params
  * @return {Array}
  */
 export const getIndustryTypes = ({ industries }) => {
@@ -245,10 +243,15 @@ export const getIndustryTypes = ({ industries }) => {
 
 /**
  * Get an array of ages
- * @param {Object} params
  * @return {Array}
  */
 export const getAges = ({ ages }) => {
   const arr = ages.map(el => el.age.split('.').pop());
   return [...new Set(arr)].sort();
 };
+
+/**
+ * Get an array of states
+ * @return {Array}
+ */
+export const getStates = ({ industries }) => [...new Set(industries.map(el => el.state))].sort();
