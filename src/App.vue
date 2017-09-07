@@ -28,6 +28,7 @@ import Error from './components/Error';
 import DataVisuals from './components/DataVisuals';
 import GlobalVisuals from './components/GlobalVisuals';
 import Sheet from './services/Sheet';
+import config from './config';
 
 const ERROR_MESSAGE = 'Couldn\'t load data :(';
 
@@ -66,16 +67,22 @@ export default {
     try {
       const ages = await (new Sheet({
         cols: ['Gender', 'State', 'Age', 'Count', 'Income Sum', 'Average Income'],
-        sheetId: '112usd1vZmqUsTyqS_Qo4aKlI9DxZ8p4k2c4rVC3oVCI',
+        sheetId: config.GOOGLE_SHEET_IDS.AGES,
       })).loadData();
 
       const postcodes = await (new Sheet({
         cols: ['State', 'Postcode', 'Average', 'Median', 'Count'],
-        sheetId: '1716gXW9rhxUCkcpzt7Wgy7B-Z55AdNELEH_XZ4PNYHs',
+        sheetId: config.GOOGLE_SHEET_IDS.POSTCODES,
+      })).loadData();
+
+      const industries = await (new Sheet({
+        cols: ['State', 'Gender', 'Industry', 'Count', 'Count Salary', 'Salary'],
+        sheetId: config.GOOGLE_SHEET_IDS.INDUSTRIES,
       })).loadData();
 
       this.$store.commit('insertAges', ages);
       this.$store.commit('insertPostcodes', postcodes);
+      this.$store.commit('insertIndustries', industries);
     } catch (err) {
       this.error = ERROR_MESSAGE;
     } finally {
@@ -180,6 +187,7 @@ small {
 
     @media (min-width: 640px) {
       flex: 0 0 20rem;
+      max-width: 20rem;
       min-height: 100vh;
     }
   }

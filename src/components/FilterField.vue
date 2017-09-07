@@ -99,6 +99,11 @@ export default {
 
     &Text {
       margin-left: 0.5rem;
+      max-width: 10em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+
       @media (max-width: 1023px) {
         display: none;
       }

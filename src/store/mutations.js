@@ -18,4 +18,13 @@ export default {
   insertPostcodes(state, postcodes) {
     state.postcodes = postcodes;
   },
+
+  /**
+   * Insert the industry rows into the store
+   * @param {Object} state
+   * @param {Array} industries
+   */
+  insertIndustries(state, industries) {
+    state.industries = industries;
+  },
 };

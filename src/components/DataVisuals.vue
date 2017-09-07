@@ -4,17 +4,18 @@
 
     <Demographics
       label="Demographics"
-      description="Lorem ipsum dolor sit amet"
       :profile="profile"
-    >
-    </Demographics>
+    ></Demographics>
 
     <Postcodes
       label="Demographics"
-      description="Lorem ipsum dolor sit amet"
       :profile="profile"
-    >
-    </Postcodes>
+    ></Postcodes>
+
+    <Industries
+      label="Industries"
+      :profile="profile"
+    ></Industries>
 
   </article>
 </template>
@@ -22,6 +23,7 @@
 <script>
 import DataSummary from './DataSummary';
 import Demographics from './Demographics';
+import Industries from './Industries';
 import Postcodes from './Postcodes';
 
 export default {
@@ -29,6 +31,7 @@ export default {
   components: {
     DataSummary,
     Demographics,
+    Industries,
     Postcodes,
   },
 };

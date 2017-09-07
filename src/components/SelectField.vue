@@ -1,6 +1,6 @@
 <template>
   <div class="SelectField" :class="{ '-empty': !displayValue, '-expanded': expanded, '-disabled': disabled }">
-    <button class="SelectField__Toggle" @click="toggle">
+    <button class="SelectField__Toggle" type="button" @click.prevent="toggle">
       <span class="SelectField__Label">{{label}}</span>
       <span class="SelectField__Value">{{displayValue}}</span>
     </button>
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-
 export default {
   props: ['options', 'label', 'disabled', 'value', 'update'],
   methods: {
@@ -37,11 +36,22 @@ export default {
     close() {
       this.expanded = false;
     },
+    documentClick(ev) {
+      if (!this.$el.contains(ev.target)) {
+        this.close();
+      }
+    },
   },
   data() {
     return {
       expanded: false,
     };
+  },
+  mounted() {
+    document.addEventListener('click', this.documentClick);
+  },
+  destroyed() {
+    document.removeEventListener('click', this.documentClick);
   },
   computed: {
     displayValue() {
@@ -74,8 +84,12 @@ export default {
     display: block;
     height: 1.5rem;
     width: 100%;
+    max-width: 100%;
     font-weight: 700;
     line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__Option {
@@ -93,7 +107,7 @@ export default {
   }
 
   &__Toggle {
-    padding: 1.75rem 0.75rem 0.5rem;
+    padding: 1.75rem calc(1.5rem + 20px) 0.5rem 0.75rem;
     display: block;
     border: 0;
     background: transparent;
@@ -147,7 +161,7 @@ export default {
     top: 100%;
     left: 0;
     background: #fff;
-    width: 100%;
+    min-width: 100%;
     position: absolute;
     transition: 0.2s;
     transform: scale(0,0);
@@ -156,8 +170,7 @@ export default {
     border-radius: 2px;
     box-shadow: rgba(0,0,0,.2) 0 1px 2px, rgba(0,0,0,.125) 0 2px 1rem, rgba(0,0,0,.15) 0 5px 10px;
     z-index: 2;
-    max-width: 100%;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     overflow-y: auto;
     text-align: left;
 
@@ -171,6 +184,7 @@ export default {
     cursor: pointer;
     padding: 0.75rem 0.75rem;
     transition: 0.2s;
+    white-space: nowrap;
 
     &.-selected {
       color: #499aff;

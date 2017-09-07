@@ -2,8 +2,15 @@
   <Block>
     <div class="Chart">
       <header class="Chart__Intro">
-        <BlockHeading>Demographics</BlockHeading>
+        <BlockHeading>Industries</BlockHeading>
         <div class="Chart__Filters">
+          <FilterField
+            :value.sync="compare.industry"
+            :options="getIndustryTypes"
+            nullLabel="All"
+          >
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="#000" stroke-miterlimit="10"><path d="M6.5 12.3v6.2c0 1.7 2.7 3 6 3s6-1.3 6-3v-6.2" data-cap="butt" data-color="color-2"/><path d="M21.5 10.2v7.3" data-cap="butt"/><path d="M12.5 16.5l-10-7 10-6 10 6z" stroke-linecap="square"/></g></svg>
+          </FilterField>
           <FilterField
             :value.sync="compare.gender"
             :options="genderOptions"
@@ -17,13 +24,6 @@
             nullLabel="All"
           >
             <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="#000" stroke-miterlimit="10" transform="translate(.5 .5)"><path d="M17 6.5L23 5v15l-8 2-6-2-8 2V7l6-1.5" data-cap="butt"/><path d="M17 6c0 3.1-5 8.1-5 8.1S7 9.1 7 6c0-3.2 2.6-5 5-5s5 1.8 5 5z" data-color="color-2" stroke-linecap="square"/><circle cx="12" cy="6" r="1" stroke-linecap="square"/></g></svg>
-          </FilterField>
-          <FilterField
-            :value.sync="compare.age"
-            :options="getAges"
-            nullLabel="All"
-          >
-            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="#000" stroke-miterlimit="10" stroke-linecap="square"><path d="M12.5 8.5c1.1 0 2-.9 2-2s-2-4-2-4-2 2.9-2 4 .9 2 2 2zm0 0v3" data-color="color-2"/><path d="M1.5 15.5h22v8h-22z"/><path d="M23.5 15.5c0 2.2-1.8 4-4 4-1.5 0-2.8-.9-3.5-2.1-.7 1.2-2 2.1-3.5 2.1s-2.8-.9-3.5-2.1c-.7 1.2-2 2.1-3.5 2.1-2.2 0-4-1.8-4-4m19 0v-4h-16v4"/></g></svg>
           </FilterField>
         </div>
       </header>
@@ -52,9 +52,9 @@ export default {
     return {
       genderOptions: config.GENDERS,
       compare: {
-        age: null,
         state: null,
         gender: null,
+        industry: null,
       },
     };
   },
@@ -66,9 +66,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getDemographicsStats',
-      'getAges',
       'getStates',
+      'getIndustryStats',
+      'getIndustryTypes',
     ]),
     averageLabel() {
       return {
@@ -78,7 +78,7 @@ export default {
       };
     },
     stats() {
-      return this.getDemographicsStats(this.compare);
+      return this.getIndustryStats(this.compare);
     },
     min() {
       return this.stats.min || 0;

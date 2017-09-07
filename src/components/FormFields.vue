@@ -7,7 +7,12 @@
     <SelectField
       label="Your age"
       :value.sync="profile.age"
-      :options="ageOptions"
+      :options="getAges"
+    />
+    <SelectField
+      label="Industry Types"
+      :value.sync="profile.industry"
+      :options="getIndustryTypes"
     />
     <InputField
       label="Postcode"
@@ -27,10 +32,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import InputField from './InputField';
 import SelectField from './SelectField';
 import RadioGroup from './RadioGroup';
-import config from '../config';
 
 export default {
   props: ['submitted', 'disabled'],
@@ -42,14 +47,20 @@ export default {
   data() {
     return {
       isSubmitted: false,
-      ageOptions: config.AGES,
       profile: {
-        income: '',
-        postcode: '',
-        age: '',
-        gender: '',
+        income: null,
+        postcode: null,
+        age: null,
+        gender: null,
+        industry: null,
       },
     };
+  },
+  computed: {
+    ...mapGetters([
+      'getIndustryTypes',
+      'getAges',
+    ]),
   },
   methods: {
     submit() {

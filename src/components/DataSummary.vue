@@ -11,14 +11,20 @@
       <div class="DataSummary__Item">
         <DataSummaryItem
           label="State"
-          :value="stateAverage"
-        >Compared to others living in <strong>{{state ? state : 'Australia'}}</strong></DataSummaryItem>
+          :value="postcodeAverage"
+        >Compared to others living in <strong>{{profile.postcode ? profile.postcode : 'Australia'}}</strong></DataSummaryItem>
       </div>
       <div class="DataSummary__Item">
         <DataSummaryItem
           label="Age"
           :value="ageAverage"
         >Compared to other <strong>{{profile.age}} year olds</strong></DataSummaryItem>
+      </div>
+      <div class="DataSummary__Item">
+        <DataSummaryItem
+          label="Industry"
+          :value="industryAverage"
+        >Compared to others in your industry</DataSummaryItem>
       </div>
     </div>
   </Block>
@@ -37,25 +43,33 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getDemographicsStats',
+      'getGenderAverage',
+      'getAgeAverage',
+      'getIndustryAverage',
+      'getPostcodeAverage',
       'getPostcodeState',
     ]),
     state() {
       return this.getPostcodeState(this.profile.postcode);
     },
+    industryAverage() {
+      const { industry } = this.profile;
+      const average = this.getIndustryAverage(industry);
+      return (this.profile.income / average).toFixed(2);
+    },
     genderAverage() {
       const { gender } = this.profile;
-      const { average } = this.getDemographicsStats({ gender });
+      const average = this.getGenderAverage(gender);
       return (this.profile.income / average).toFixed(2);
     },
     ageAverage() {
       const { age } = this.profile;
-      const { average } = this.getDemographicsStats({ age });
+      const average = this.getAgeAverage(age);
       return (this.profile.income / average).toFixed(2);
     },
-    stateAverage() {
-      const { state } = this.profile;
-      const { average } = this.getDemographicsStats({ state });
+    postcodeAverage() {
+      const { postcode } = this.profile;
+      const average = this.getPostcodeAverage(postcode);
       return (this.profile.income / average).toFixed(2);
     },
   },
@@ -66,6 +80,7 @@ export default {
 .DataSummary {
   display: flex;
   text-align: center;
+  flex-wrap: wrap;
 
   @media (max-width: 1023px) {
     flex-direction: column;
@@ -78,15 +93,13 @@ export default {
   &__Item {
     flex: 1;
     padding: 1.5rem
-  }
-
-  &__Item + &__Item {
-    @media (max-width: 1023px) {
-      border-top: rgba(0,0,0,.075) solid 1px;
-    }
 
     @media (min-width: 1024px) {
-      border-left: rgba(0,0,0,.075) solid 2px;
+      flex: 0 0 50%;
+    }
+
+    @media (min-width: 1360px) {
+      flex: 0 0 25%;
     }
   }
 }
