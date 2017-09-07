@@ -6,6 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import MarkerClusterer from '../lib/markerclusterer';
 import mapStyles from '../misc/mapStyles';
 import mapIcon from '../misc/mapIcon';
 import Loading from './Loading';
@@ -77,14 +78,14 @@ export default {
     },
 
     addClustersToMap(map, markers) {
-      return new window.MarkerClusterer(map, markers, {
+      return new MarkerClusterer(map, markers, {
         styles: [{
           url: mapIcon,
           width: 53,
           height: 66,
           textSize: 12,
           fontFamily: 'Roboto',
-          anchorText: [-7, 0],
+          anchorText: [0, 0],
         }],
       });
     },

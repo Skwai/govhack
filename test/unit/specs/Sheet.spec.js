@@ -15,4 +15,18 @@ describe('Sheet.js', () => {
       expect(Sheet.toCamelCase('FOO BAR BAZ')).to.equal('fooBarBaz');
     });
   });
+
+  describe('Sheet.fetchData', () => {
+    beforeEach(() => {
+      jasmine.Ajax.install();
+    });
+
+    afterEach(() => {
+      jasmine.Ajax.uninstall()
+    });
+
+    it('Should fetch the data from Google Sheets', () => {
+
+    });
+  });
 });
