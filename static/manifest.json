@@ -1,0 +1,16 @@
+{
+  "name": "WageSage",
+  "short_name": "WageSage",
+  "icons": [
+    {
+      "48": "/static/icon.svg",
+      "96": "/static/icon.svg",
+      "128": "/static/icon.svg"
+    }
+  ],
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#fff",
+  "theme_color": "#499aff"
+}
