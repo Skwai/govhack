@@ -9,6 +9,12 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
+(() => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+})();
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
