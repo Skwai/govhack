@@ -4,6 +4,7 @@
       <input
         class="InputField__Input"
         type="number"
+        required
         v-model="inputValue"
         :disabled="disabled"
       >

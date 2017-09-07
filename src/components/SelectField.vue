@@ -1,6 +1,6 @@
 <template>
   <div class="SelectField" :class="{ '-empty': !displayValue, '-expanded': expanded, '-disabled': disabled }">
-    <button class="SelectField__Toggle" @click="toggle">
+    <button class="SelectField__Toggle" type="button" @click.prevent="toggle">
       <span class="SelectField__Label">{{label}}</span>
       <span class="SelectField__Value">{{displayValue}}</span>
     </button>
